@@ -4,7 +4,7 @@ Shop til you drop devops and webapp project for TDT4242 2018.
 (Something about which folders are relevant for code review)
 
 ## Development setup
-Do the following steps to set up and run the app for development.
+Do the following steps to set up and run the app for development. Functionality is dependent on having the backend up and running.
 ### Backend
 Make sure you have sails installed. Guide and introduction to sails can be found at https://sailsjs.com/get-started
 
@@ -32,4 +32,3 @@ To locally run the frontend on your computer, CD to the frontend folder, and lau
 ```
 npm start
 ```
-Functionality is dependent on having the backend up and running.
