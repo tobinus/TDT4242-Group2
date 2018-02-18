@@ -35,3 +35,15 @@ Get user details for user with :id.
 DELETE /api/user/:id
 ```
 Delete user with :id.
+```
+POST /api/user/login
+```
+Log in a user. Required fields: `email` and `password`.
+```
+POST /api/user/logout
+```
+Logout a user
+```
+GET /api/user/current
+```
+Get details for the current user
