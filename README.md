@@ -14,3 +14,24 @@ Make sure you have sails installed. Guide and introduction to sails can be found
 To install the application, CD to the backend folder, and write "npm install"
 
 To locally run the backend on your computer, CD to the backend folder, and serve the backedn with "sails lift"
+
+## API reference
+### Users
+```
+POST /api/user
+```
+Create a new user.  
+Required fields: `email` and `password`.
+Password must be 8 to 72 characters.
+```
+GET /api/user
+```
+Get list of users.
+```
+GET /api/user/:id
+```
+Get user details for user with :id.
+```
+DELETE /api/user/:id
+```
+Delete user with :id.
