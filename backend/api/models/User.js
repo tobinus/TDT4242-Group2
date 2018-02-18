@@ -47,9 +47,9 @@ module.exports = {
    * Hash password before storing new user
    */
   beforeCreate: function (user, cb) {
+    user.isAdmin = false; // force not admin
     bcrypt.hash(user.password, 10, function (err, hash) {
       if (err) return cb(err);
-      user.isAdmin = false; // force not admin
       user.password = hash;
       cb(); // Continue creation
     });

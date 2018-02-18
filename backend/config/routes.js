@@ -47,6 +47,7 @@ module.exports.routes = {
   ***************************************************************************/
 
   'POST /api/user/login': 'UserController.login',
-  'GET /api/user/logout': 'UserController.logout',
+  'POST /api/user/logout': 'UserController.logout',
+  'GET /api/user/current': 'UserController.current',
 
 };

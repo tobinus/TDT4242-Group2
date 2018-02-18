@@ -12,7 +12,7 @@ module.exports = {
    */
   login: function (req, res) {
     // Find user and check password
-    User.findOne({email: req.param('email')}, function (err, user) {
+    User.findOne({email: req.param('email')}).exec(function (err, user) {
       if (err) return res.negotiate(err);
       if (!user) return res.notFound();
       user.checkPassword(req.param('password'), function (err, verified) {
@@ -33,7 +33,26 @@ module.exports = {
   logout: function (req, res) {
     req.session.userId = null;
     req.session.authenticated = false;
-    return res.ok();
+    return res.ok('Logged out');
+  },
+
+  /**
+   * Get details for the currently logged in user, if any
+   */
+  current: function (req, res) {
+    // Check if logged in
+    if (req.session.authenticated && req.session.userId) {
+      // Find user
+      User.findOne(req.session.userId).exec(function (err, user) {
+        if (err) return res.negotiate(err);
+        if (!user) return res.notFound('User not found');
+
+        // Return details
+        return res.json(user);
+      });
+    } else {
+      return res.notFound('Not logged in');
+    }
   },
 
 };

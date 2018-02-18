@@ -58,6 +58,7 @@ module.exports.policies = {
     populate: false,
     login: true,
     logout: true,
+    current: true,
   }
 
 };
