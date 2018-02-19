@@ -52,13 +52,15 @@ module.exports.policies = {
   UserController: {
     '*': false,
     create: true,
-    find: true,
-    findOne: 'sessionAuth',
-    destroy: 'sessionAuth',
+    find: 'isAdmin',
+    findOne: false,
+    destroy: 'isAdmin',
     populate: false,
     login: true,
     logout: true,
     current: true,
+    makeAdmin: 'isAdmin',
+    removeAdmin: 'isAdmin',
   }
 
 };

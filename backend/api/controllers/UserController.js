@@ -55,4 +55,26 @@ module.exports = {
     }
   },
 
+  /**
+   * Give a user admin privileges
+   */
+  makeAdmin: function (req, res) {
+    User.update(parseInt(req.params.id), {isAdmin: true}).exec(function (err, user) {
+      if (err) return res.negotiate(err);
+      if (!user) return res.notFound('User not found');
+      return res.ok('User updated');
+    });
+  },
+
+  /**
+   * Remove a users admin privileges
+   */
+  removeAdmin: function (req, res) {
+    User.update(parseInt(req.params.id), {isAdmin: false}).exec(function (err, user) {
+      if (err) return res.negotiate(err);
+      if (!user) return res.notFound('User not found');
+      return res.ok('User updated');
+    });
+  },
+
 };

@@ -49,5 +49,7 @@ module.exports.routes = {
   'POST /api/user/login': 'UserController.login',
   'POST /api/user/logout': 'UserController.logout',
   'GET /api/user/current': 'UserController.current',
+  'POST /api/user/:id/makeadmin': 'UserController.makeAdmin',
+  'POST /api/user/:id/removeadmin': 'UserController.removeAdmin',
 
 };

@@ -20,21 +20,22 @@ To locally run the backend on your computer, CD to the backend folder, and serve
 ```
 POST /api/user
 ```
-Create a new user.  
-Required fields: `email` and `password`.
+Create a new user. Required fields: `email` and `password`.
 Password must be 8 to 72 characters.
 ```
 GET /api/user
 ```
-Get list of users.
+Get the list of all users. Requires admin privileges.
+<!--
 ```
 GET /api/user/:id
 ```
 Get user details for user with :id.
+-->
 ```
 DELETE /api/user/:id
 ```
-Delete user with :id.
+Delete user with :id. Requires admin privileges.
 ```
 POST /api/user/login
 ```
@@ -42,8 +43,16 @@ Log in a user. Required fields: `email` and `password`.
 ```
 POST /api/user/logout
 ```
-Logout a user
+Logout the current user.
 ```
 GET /api/user/current
 ```
-Get details for the current user
+Get details for the currently logged in user, if any.
+```
+POST /api/user/:id/makeadmin
+```
+Give user with :id admin privileges. Requires admin privileges.
+```
+POST /api/user/:id/removeadmin
+```
+Remove admin privileges from user with :id. Requires admin privileges.
