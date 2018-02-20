@@ -1,5 +1,5 @@
 <div>
-  <button *ngIf="isLoggedIn" (click)="logout">Logout</button>
+  <button *ngIf="!isLoggedIn" (click)="logout()">Logout</button>
   <div *ngIf="!isLoggedIn">
     <form (ngSubmit)="login(); loginForm.reset();" #loginForm="ngForm">
       <div>
@@ -22,4 +22,5 @@
       <button type="submit" [disabled]="!loginForm.form.valid">Login</button>
     </form>
   </div>
+  <button (click)="currentUser()">current user</button>
 </div>
