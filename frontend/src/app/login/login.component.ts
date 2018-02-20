@@ -26,22 +26,25 @@ export class LoginComponent implements OnInit {
   @Input('isLoggedIn') isLoggedIn: boolean;
   
   login(){
-    alert("login");
     // call service object, get observable.
     this.userAuthService.login(this.userModel.email, this.userModel.password).subscribe(res => {
+      // successfull login
       console.log(res);
+      this.handleLoginResult(200);
+    }, err =>{
+      // error
+      console.log(err.status);
+      this.handleLoginResult(err.status);
     });
     
   }
   
   logout(){
-    alert("logout");
     this.userAuthService.logout().subscribe(res => {
       console.log(res);
+    }, err => {
+      console.log(err)
     });
-    // call service object to logout, don't need observable.
-    // set global "isloggedin" bool to false from service object.
-    // this.userservice.logout();
   }
   
   currentUser(){
@@ -53,10 +56,13 @@ export class LoginComponent implements OnInit {
   private handleLoginResult(res){
     if(res === 200){
       // handle successfull login
+      alert("logged in");
     }else if( res === 403 || res === 404){
       // handle username or password wrong
+      alert("username or password wrong");
     }else{
       // handle system error
+      alert("system is broken :(");
     }
   }
 }
