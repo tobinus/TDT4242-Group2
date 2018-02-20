@@ -40,6 +40,7 @@ module.exports = {
    * Get details for the currently logged in user, if any
    */
   current: function (req, res) {
+    console.log(req.session)
     // Check if logged in
     if (req.session.authenticated && req.session.userId) {
       // Find user
