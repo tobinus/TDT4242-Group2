@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { UserModel } from '../app.models';
-import { UserAuthService } from '../_services/user-auth.service';
+import { UserAuthService } from "../_shared/services/user-auth.service";
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css'],
-  providers: [UserAuthService],
+  providers: [],
 })
 export class RegisterComponent implements OnInit {
 
@@ -17,13 +16,13 @@ export class RegisterComponent implements OnInit {
   ngOnInit() {
   }
 
-  userModel: UserModel = {
+  userCredentials = {
     email: "",
     password: "",
-  }
-  
+  };
+
   register(){
-    this.userAuthService.register(this.userModel.email, this.userModel.password).subscribe(res => {
+    this.userAuthService.register(this.userCredentials.email, this.userCredentials.password).subscribe(res => {
       console.log(res);
     });
   }
