@@ -24,13 +24,13 @@ export class ProductsService {
   
   /* getting all product objects, with no skip or limit */
   getAllProducts(): Observable<ProductModel[]> {
-    return this.getProducts('/api/movie');
+    return this.getProducts('/api/product');
   }
   
   // limit, skip, searchTerm, sort(ASC/DESC), other attributes
   /* Getting producs based on limit, skip, searchterm, and price sort  */
   searchProducts(limit, skip, searchTerm, sort): Observable<ProductModel[]>{
-    let url = '/api/movie?where={"name": {"contains": "' + searchTerm + '"}}' + '&skip=' + skip + '&limit=' + limit + '&sort=' + sort;
+    let url = '/api/product?where={"name": {"contains": "' + searchTerm + '"}}' + '&skip=' + skip + '&limit=' + limit + '&sort=' + sort;
     return this.getProducts(url);
   }
   
