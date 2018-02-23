@@ -15,6 +15,7 @@ import { ProductCreationComponent } from './product-creation/product-creation.co
 
 import { UserAuthService } from './_shared/services/user-auth.service';
 import { NotFoundComponent } from './errors/not-found/not-found.component';
+import { UserAuthService } from "./_shared/services/user-auth.service";
 
 /**
  * Initialize app and check if a user is logged in
@@ -36,7 +37,7 @@ function init_app(userAuthService: UserAuthService) {
     LoginComponent,
     MypageComponent,
     NotFoundComponent,
-    ProductCreationComponent
+    ProductCreationComponent,
   ],
   imports: [
     BrowserModule,
