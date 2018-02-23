@@ -10,9 +10,10 @@ import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { MypageComponent } from './mypage/mypage.component';
 import { MaterializeModule } from 'angular2-materialize';
-import { ProductCreationComponent } from './product-creation/product-creation.component';
 
 import { UserAuthService } from "./_shared/services/user-auth.service";
+import { ProductsService } from "./_shared/services/products.service";
+import { ProductCreationComponent } from './product-creation/product-creation.component';
 
 /**
  * Initialize app and check if a user is logged in
@@ -44,6 +45,7 @@ function init_app(userAuthService: UserAuthService) {
   ],
   providers: [
     UserAuthService,
+    ProductsService,
     {
       provide: APP_INITIALIZER,
       useFactory: init_app,
