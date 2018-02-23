@@ -12,7 +12,7 @@ import { MypageComponent } from './mypage/mypage.component';
 import { MaterializeModule } from 'angular2-materialize';
 import { ProductCreationComponent } from './product-creation/product-creation.component';
 
-import { UserAuthService } from './_shared/services/user-auth.service';
+import { UserAuthService } from "./_shared/services/user-auth.service";
 
 /**
  * Initialize app and check if a user is logged in
