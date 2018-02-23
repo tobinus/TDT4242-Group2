@@ -49,6 +49,7 @@ function init_app(userAuthService: UserAuthService) {
   ],
   providers: [
     UserAuthService,
+    ProductsService,
     {
       provide: APP_INITIALIZER,
       useFactory: init_app,
@@ -56,12 +57,6 @@ function init_app(userAuthService: UserAuthService) {
       multi: true,
     },
   ],
-<<<<<<< HEAD
-=======
-  providers: [UserAuthService,
-             ProductsService
-             ],
->>>>>>> added product service to module, made 1st pass in product creation for calling api when creating products
   bootstrap: [AppComponent]
 })
 export class AppModule { }

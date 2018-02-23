@@ -1,7 +1,6 @@
 import { Component, OnInit, Input} from '@angular/core';
 
 import { ProductsService } from '../_shared/services/products.service';
-
 @Component({
   selector: 'app-product-creation',
   templateUrl: './product-creation.component.html',
@@ -10,7 +9,6 @@ import { ProductsService } from '../_shared/services/products.service';
 export class ProductCreationComponent implements OnInit {
 
   constructor(private prodService: ProductsService,) { }
-
 
   
   prodCredentials = {
@@ -40,6 +38,4 @@ export class ProductCreationComponent implements OnInit {
     
     // after observable object has done it's job, and it's confirmed that the product has been created in the backend, set this.loading to false and give the admin some "it has been made" message or something
   }
-  
-  
 }

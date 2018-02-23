@@ -1,10 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from "@angular/router"
-
 import { RegisterComponent } from "./register/register.component";
 import { LoginComponent } from "./login/login.component";
 import { MypageComponent } from "./mypage/mypage.component";
+<<<<<<< HEAD
 import { NotFoundComponent} from "./errors/not-found/not-found.component";
+=======
+>>>>>>> skeleton for product creation page, need to rebase of merged branches to continue
 import {ProductCreationComponent} from "./product-creation/product-creation.component";
 
 const appRoutes: Routes = [
