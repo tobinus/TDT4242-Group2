@@ -1,6 +1,6 @@
 <div class="container">
   <button *ngIf="!isLoggedIn" (click)="logout()">Logout</button>
-  <div *ngIf="!isLoggedIn">
+  <div *ngIf="!isLoggedIn" class="row">
     <form class="col s12" (ngSubmit)="login(); loginForm.reset();" #loginForm="ngForm">
       <div class="row">
         <div class="input-field col s6">
@@ -30,4 +30,5 @@
       <button type="submit" [disabled]="!loginForm.form.valid" class="right">Login</button>
     </form>
   </div>
+  <a class="right" routerLink="/register" routerLinkActive="active-link">Create new account</a>
 </div>
