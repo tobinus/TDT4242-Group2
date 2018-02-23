@@ -17,4 +17,21 @@ class UserModel{
 
 }
 
-export {UserModel}
+class ProductModel{
+  id: number;
+  name: string;
+  price: number;
+  description: string;
+  
+  constructor(product){
+    if(product.hasOwnProperty('id') && product.hasOwnProperty('name') && product.hasOwnProperty('price') && product.hasOwnProperty('description')){
+      this.id = product.id;
+      this.name = product.name;
+      this.price = product.price;
+      this.description = product.description;
+    }
+  }
+  
+}
+
+export {UserModel, ProductModel}
