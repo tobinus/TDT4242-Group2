@@ -1,6 +1,7 @@
-import { Component, OnInit, Input} from '@angular/core';
+import { Component, OnInit, OnDestroy} from '@angular/core';
 import { UserAuthService } from '../_shared/services/user-auth.service';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-login',
@@ -8,7 +9,14 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.css'],
   providers: [],
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
+
+  private isLoggedIn: boolean = false;
+  private userAuthEventsSub: Subscription;
+  private userCredentials = {
+    email: "",
+    password: "",
+  };
 
   constructor(
     private userAuthService: UserAuthService,
@@ -16,16 +24,25 @@ export class LoginComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    // Subscribe to login and logout user auth events
+    this.userAuthEventsSub = this.userAuthService.getUserAuthEvents().subscribe(
+      next => {
+        if (next.hasOwnProperty('isLoggedIn')) {
+          this.isLoggedIn = next['isLoggedIn'];
+          if (this.isLoggedIn) this.router.navigate(['/mypage']);
+        }
+      }
+    );
   }
 
-  userCredentials = {
-    email: "",
-    password: "",
-  };
+  ngOnDestroy() {
+    // Un-subscribe from login and logout user auth events to avoid mem leaks
+    this.userAuthEventsSub.unsubscribe();
+  }
 
-  // bool value to display either logout button or login form.
-  @Input('isLoggedIn') isLoggedIn: boolean;
-
+  /**
+   * Run when user presses the log in button
+   */
   login(){
     // call service object, get observable.
     this.userAuthService.login(this.userCredentials.email, this.userCredentials.password).subscribe(res => {
@@ -34,30 +51,28 @@ export class LoginComponent implements OnInit {
       this.handleLoginResult(200);
     }, err =>{
       // error
-      console.log(err.status);
-      this.handleLoginResult(err.status);
-    });
-
-  }
-
-  logout(){
-    this.userAuthService.logout().subscribe(res => {
-      console.log(res);
-    }, err => {
-      console.log(err)
+      if (err.status) {
+        this.handleLoginResult(err.status);
+      } else {
+        // UserModel mismatch or unknown error
+        console.log(err);
+      }
     });
   }
 
-
-  private handleLoginResult(res){
-    if(res === 200){
-      this.router.navigate(['/mypage'])
-    }else if(res === 401){
+  /**
+   * Handle login based on http result status code
+   * @param statusCode
+   */
+  private handleLoginResult(statusCode){
+    if(statusCode === 200){
+      this.router.navigate(['/']);
+    }else if(statusCode === 401){
       // handle username or password wrong
-      alert("username or password wrong");
+      alert("Wrong username or password.");
     }else{
       // handle system error
-      alert("system is broken :(");
+      alert("System is broken :( " + statusCode);
     }
   }
 }

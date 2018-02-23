@@ -1,2 +1,16 @@
 
-<h1>{{ title }}</h1>
+<header class="content-width">
+  <h1>{{ title }}</h1>
+  <nav class="navbar">
+    <ul>
+      <li><a routerLink="/">Super deals</a></li>
+      <li><a routerLink="/products">Products</a></li>
+    </ul>
+    <ul>
+      <li><a routerLink="/cart">Cart</a></li>
+      <li *ngIf="!isLoggedIn"><a routerLink="/login">Log in</a></li>
+      <li *ngIf="isLoggedIn"><a routerLink="/mypage">My page</a></li>
+      <li *ngIf="isLoggedIn"><a (click)="logout()">Log out</a></li>
+    </ul>
+  </nav>
+</header>

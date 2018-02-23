@@ -1,13 +1,12 @@
 
 <div *ngIf="currentUser">
   <h2>{{currentUser.email}}</h2>
-  Shopping history etc.
+  <p>Shopping history etc.</p>
 </div>
 <div *ngIf="!currentUser">
-  Go to login
-  <!--TODO redirect to login?-->
+  <p>You must log in to view this page.</p>
 </div>
-<div *ngIf="currentUser.isAdmin">
+<div *ngIf="currentUser && currentUser.isAdmin">
   <h2>Admin stuff here?</h2>
   <!--TODO admin page here or separate page?-->
 </div>

@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { UserAuthService } from '../_shared/services/user-auth.service';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-register',
@@ -8,7 +9,14 @@ import { Router } from '@angular/router';
   styleUrls: ['./register.component.css'],
   providers: [],
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent implements OnInit, OnDestroy {
+
+  private isLoggedIn: boolean = false;
+  private userAuthEventsSub: Subscription;
+  private userCredentials = {
+    email: "",
+    password: "",
+  };
 
   constructor(
     private userAuthService: UserAuthService,
@@ -16,28 +24,47 @@ export class RegisterComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    // Subscribe to login and logout user auth events
+    this.userAuthEventsSub = this.userAuthService.getUserAuthEvents().subscribe(
+      next => {
+        if (next.hasOwnProperty('isLoggedIn')) {
+          this.isLoggedIn = next['isLoggedIn'];
+          if (this.isLoggedIn) this.router.navigate(['/mypage']);
+        }
+      }
+    );
   }
 
-  userCredentials = {
-    email: "",
-    password: "",
-  };
+  ngOnDestroy() {
+    // Un-subscribe from login and logout user auth events to avoid mem leaks
+    this.userAuthEventsSub.unsubscribe();
+  }
 
+  /**
+   * Run when user presses register button
+   */
   register(){
     this.userAuthService.register(this.userCredentials.email, this.userCredentials.password).subscribe(res => {
-      // TODO do automatic login on success?
-      console.log(res);
-      this.handeRegisterResult(200);
+      this.handleRegisterResult(201);
     }, err =>{
-      this.handeRegisterResult(err.status);
+      if (err.status) this.handleRegisterResult(err.status);
+      else console.log(err);
     });
   }
-  
-  private handeRegisterResult(res){
-    if(res === 200){
-      this.router.navigate(['/login']);
+
+  /**
+   * Handle registering based on http result status code
+   * @param statusCode
+   */
+  private handleRegisterResult(statusCode){
+    if(statusCode === 201){
+      // this.router.navigate(['/login']);
+      this.userAuthService.login(this.userCredentials.email, this.userCredentials.password).subscribe(result => {
+        this.router.navigate(['/']);
+      });
     }else{
-      alert('error :(')
+      alert('An unexpected error occurred :(' + statusCode);
     }
   }
+
 }
