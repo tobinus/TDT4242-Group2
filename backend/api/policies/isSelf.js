@@ -14,5 +14,5 @@ module.exports = function(req, res, next) {
   }
 
   // User is not allowed
-  return res.forbidden('You are not permitted to perform this action.');
+  return res.forbidden({error: 'You are not permitted to perform this action'});
 };

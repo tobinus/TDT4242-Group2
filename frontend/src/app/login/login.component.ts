@@ -1,15 +1,78 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy} from '@angular/core';
+import { UserAuthService } from '../_shared/services/user-auth.service';
+import { Router } from '@angular/router';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
+  providers: [],
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
 
-  constructor() { }
+  private isLoggedIn: boolean = false;
+  private userAuthEventsSub: Subscription;
+  private userCredentials = {
+    email: "",
+    password: "",
+  };
+
+  constructor(
+    private userAuthService: UserAuthService,
+    private router: Router,
+  ) { }
 
   ngOnInit() {
+    // Subscribe to login and logout user auth events
+    this.userAuthEventsSub = this.userAuthService.getUserAuthEvents().subscribe(
+      next => {
+        if (next.hasOwnProperty('isLoggedIn')) {
+          this.isLoggedIn = next['isLoggedIn'];
+          if (this.isLoggedIn) this.router.navigate(['/mypage']);
+        }
+      }
+    );
   }
 
+  ngOnDestroy() {
+    // Un-subscribe from login and logout user auth events to avoid mem leaks
+    this.userAuthEventsSub.unsubscribe();
+  }
+
+  /**
+   * Run when user presses the log in button
+   */
+  login(){
+    // call service object, get observable.
+    this.userAuthService.login(this.userCredentials.email, this.userCredentials.password).subscribe(res => {
+      // successfull login
+      console.log(res);
+      this.handleLoginResult(200);
+    }, err =>{
+      // error
+      if (err.status) {
+        this.handleLoginResult(err.status);
+      } else {
+        // UserModel mismatch or unknown error
+        console.log(err);
+      }
+    });
+  }
+
+  /**
+   * Handle login based on http result status code
+   * @param statusCode
+   */
+  private handleLoginResult(statusCode){
+    if(statusCode === 200){
+      this.router.navigate(['/']);
+    }else if(statusCode === 401){
+      // handle username or password wrong
+      alert("Wrong username or password.");
+    }else{
+      // handle system error
+      alert("System is broken :( " + statusCode);
+    }
+  }
 }
