@@ -12,6 +12,7 @@ import { MypageComponent } from './mypage/mypage.component';
 import { MaterializeModule } from 'angular2-materialize';
 
 import { UserAuthService } from "./_shared/services/user-auth.service";
+import { ProductsService } from "./_shared/services/products.service";
 import { ProductCreationComponent } from './product-creation/product-creation.component';
 
 
@@ -31,7 +32,9 @@ import { ProductCreationComponent } from './product-creation/product-creation.co
     HttpClientModule,
     MaterializeModule,
   ],
-  providers: [UserAuthService],
+  providers: [UserAuthService,
+             ProductsService
+             ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
