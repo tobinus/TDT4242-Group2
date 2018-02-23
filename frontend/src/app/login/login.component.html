@@ -1,26 +1,33 @@
-<div>
+<div class="container">
   <button *ngIf="!isLoggedIn" (click)="logout()">Logout</button>
   <div *ngIf="!isLoggedIn">
     <form class="col s12" (ngSubmit)="login(); loginForm.reset();" #loginForm="ngForm">
-      <div>
-        <label for="email">email</label>
-        <input
-          type="email" id="email" name="email" required
-          pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
-          [(ngModel)]="userCredentials.email"
-          #email="ngModel"
-        />
+      <div class="row">
+        <div class="input-field col s6">
+
+          <label for="email">email</label>
+          <input
+            type="email" id="email" name="email" required
+            pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
+            [(ngModel)]="userCredentials.email"
+            #email="ngModel"
+            class="validate"
+            placeholder="email"
+          />
+
+        </div>
+        <div class="input-field col s6">
+          <label for="password">password</label>
+          <input
+            type="password" id="password" name="password" required
+            [(ngModel)]="userCredentials.password"
+            #password="ngModel"
+            placeholder="password"
+          />
+        </div>
+
       </div>
-      <div>
-        <label for="password">password</label>
-        <input
-          type="password" id="password" name="password" required
-          [(ngModel)]="userCredentials.password"
-          #password="ngModel"
-        />
-      </div>
-      <button type="submit" [disabled]="!loginForm.form.valid">Login</button>
+      <button type="submit" [disabled]="!loginForm.form.valid" class="right">Login</button>
     </form>
   </div>
-  <button (click)="currentUser()">current user</button>
 </div>

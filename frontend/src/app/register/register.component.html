@@ -1,20 +1,27 @@
-<form (ngSubmit)="register(); registerForm.reset()" #registerForm="ngForm">
-  <div>
-    <label for="email">email</label>
-    <input
-      type="email" id="email" name="email" required
-      pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
-      [(ngModel)]="userCredentials.email"
-      #email="ngModel"
-    />
-  </div>
-  <div>
-    <label for="password">password</label>
-    <input
-      type="password" id="password" name="password" required minlength="8"
-      [(ngModel)]="userCredentials.password"
-      #password="ngModel"
-    />
-  </div>
-  <button type="submit" [disabled]="!registerForm.form.valid">Register</button>
-</form>
+<div class="container">
+  <form (ngSubmit)="register(); registerForm.reset()" #registerForm="ngForm">
+    <div class="row">
+      <div class="input-field col s6">
+        <label for="email">email</label>
+        <input
+          type="email" id="email" name="email" required
+          pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
+          [(ngModel)]="userCredentials.email"
+          #email="ngModel"
+          class="validate"
+          placeholder="email"
+        />
+      </div>
+      <div class="input-field col s6">
+        <label for="password">password</label>
+        <input
+          type="password" id="password" name="password" required minlength="8"
+          [(ngModel)]="userCredentials.password"
+          #password="ngModel"
+          placeholder="password"
+        />
+      </div>
+    </div>
+    <button type="submit" [disabled]="!registerForm.form.valid" class="right">Register</button>
+  </form>
+</div>
