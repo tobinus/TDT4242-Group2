@@ -12,6 +12,7 @@ import { MypageComponent } from './mypage/mypage.component';
 import { MaterializeModule } from 'angular2-materialize';
 
 import { UserAuthService } from "./_shared/services/user-auth.service";
+import { ProductCreationComponent } from './product-creation/product-creation.component';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { UserAuthService } from "./_shared/services/user-auth.service";
     NavbarComponent,
     RegisterComponent,
     LoginComponent,
-    MypageComponent
+    MypageComponent,
+    ProductCreationComponent,
   ],
   imports: [
     BrowserModule,
