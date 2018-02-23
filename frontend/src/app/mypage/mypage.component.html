@@ -1,3 +1,13 @@
-<p>
-  mypage works!
-</p>
+
+<div *ngIf="currentUser">
+  <h2>{{currentUser.email}}</h2>
+  Shopping history etc.
+</div>
+<div *ngIf="!currentUser">
+  Go to login
+  <!--TODO redirect to login?-->
+</div>
+<div *ngIf="currentUser.isAdmin">
+  <h2>Admin stuff here?</h2>
+  <!--TODO admin page here or separate page?-->
+</div>
