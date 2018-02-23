@@ -54,14 +54,5 @@ export class ProductsService {
     return this.http.post(url, body);
     
   }
-  
-    register(email: string, password: string): Observable<object>{
-    let body = {
-      email: email,
-      password: password,
-    };
-    let url = '/api/user';
-    return this.http.post(url, body)
-  }
 
 }
