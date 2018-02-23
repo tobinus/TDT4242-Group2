@@ -23,6 +23,7 @@ export class RegisterComponent implements OnInit {
 
   register(){
     this.userAuthService.register(this.userCredentials.email, this.userCredentials.password).subscribe(res => {
+      // TODO do automatic login on success?
       console.log(res);
     });
   }

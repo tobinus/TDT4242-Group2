@@ -25,7 +25,7 @@ export class UserAuthService {
 
     let url = '/api/user/login';
     let obs = this.http.post(url, body).map((result) => new UserModel(result));
-    obs.do((result) => {this.currentUser = result});
+    obs.do((result) => {this.currentUser = result; console.log('Current user: ' + this.currentUser)});
     return obs;
   }
 
@@ -50,7 +50,7 @@ export class UserAuthService {
     }
     let url = '/api/user/current';
     let obs = this.http.get(url).map((result) => new UserModel(result));
-    obs.do((result) => {this.currentUser = result});
+    obs.do((result) => {this.currentUser = result; console.log('Current user: ' + this.currentUser)});
     return obs;
   }
 

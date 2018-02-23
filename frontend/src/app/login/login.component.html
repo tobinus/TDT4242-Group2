@@ -4,18 +4,18 @@
     <form (ngSubmit)="login(); loginForm.reset();" #loginForm="ngForm">
       <div>
         <label for="email">email</label>
-        <input 
+        <input
           type="email" id="email" name="email" required
-          pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" 
-          [(ngModel)]="userModel.email"
+          pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
+          [(ngModel)]="userCredentials.email"
           #email="ngModel"
         />
       </div>
       <div>
         <label for="password">password</label>
-        <input 
+        <input
           type="password" id="password" name="password" required
-          [(ngModel)]="userModel.password"
+          [(ngModel)]="userCredentials.password"
           #password="ngModel"
         />
       </div>
