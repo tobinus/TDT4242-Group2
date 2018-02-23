@@ -9,6 +9,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { MypageComponent } from './mypage/mypage.component';
+import { MaterializeModule } from 'angular2-materialize';
 
 import { UserAuthService } from "./_shared/services/user-auth.service";
 
@@ -26,6 +27,7 @@ import { UserAuthService } from "./_shared/services/user-auth.service";
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
+    MaterializeModule,
   ],
   providers: [UserAuthService],
   bootstrap: [AppComponent]

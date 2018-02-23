@@ -1,7 +1,7 @@
 <div>
   <button *ngIf="!isLoggedIn" (click)="logout()">Logout</button>
   <div *ngIf="!isLoggedIn">
-    <form (ngSubmit)="login(); loginForm.reset();" #loginForm="ngForm">
+    <form class="col s12" (ngSubmit)="login(); loginForm.reset();" #loginForm="ngForm">
       <div>
         <label for="email">email</label>
         <input
