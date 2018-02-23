@@ -1,0 +1,44 @@
+<div class="container">
+  <h3>Product creation - admin site</h3>
+  <div class="row">
+    <form class="col s12" (ngSubmit)="productForm.reset()" #productForm="ngForm">
+      <div class="row">
+        <div class="input-field col s6">
+          <label for="productname">Product name</label>
+          <input
+            type="text" id="productname" name="productname" required
+            [(ngModel)]="prodCredentials.productname"
+            #productname="ngModel"
+            class="validate"
+            placeholder="Product name"
+          />
+
+        </div>
+        <div class="input-field col s6">
+          <label for="unitPrice">Unit price</label>
+          <input
+            type="number" id="unitPrice" name="unitPrice" required
+            [(ngModel)]="prodCredentials.unitPrice"
+            #password="ngModel"
+            placeholder="unitPrice"
+          />
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <label for></label>
+          <textarea 
+            id="unitDesc" name="unitDesc" required
+            [(ngModel)]="prodCredentials.description" 
+            #unitDesc="ngModel"
+            placeholder="unit description"
+            class="materialize-textarea"
+          ></textarea>
+        </div>
+      </div>
+      <button type="submit" [disabled]="!productForm.form.valid" class="right">Login</button>
+    </form>
+  </div>
+</div>
+
+

@@ -11,6 +11,7 @@ import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { MypageComponent } from './mypage/mypage.component';
 import { MaterializeModule } from 'angular2-materialize';
+import { ProductCreationComponent } from './product-creation/product-creation.component';
 
 import { UserAuthService } from './_shared/services/user-auth.service';
 import { NotFoundComponent } from './errors/not-found/not-found.component';
@@ -34,7 +35,8 @@ function init_app(userAuthService: UserAuthService) {
     RegisterComponent,
     LoginComponent,
     MypageComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    ProductCreationComponent
   ],
   imports: [
     BrowserModule,
