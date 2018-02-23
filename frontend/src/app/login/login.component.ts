@@ -1,5 +1,6 @@
 import { Component, OnInit, Input} from '@angular/core';
-import { UserAuthService } from "../_shared/services/user-auth.service";
+import { UserAuthService } from '../_shared/services/user-auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -11,6 +12,7 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private userAuthService: UserAuthService,
+    private router: Router,
   ) { }
 
   ngOnInit() {
@@ -46,16 +48,10 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  currentUser(){
-    this.userAuthService.getCurrentUser().subscribe(res => {
-      console.log(res);
-    });
-  }
 
   private handleLoginResult(res){
     if(res === 200){
-      // handle successfull login
-      alert("logged in");
+      this.router.navigate(['/mypage'])
     }else if(res === 401){
       // handle username or password wrong
       alert("username or password wrong");
