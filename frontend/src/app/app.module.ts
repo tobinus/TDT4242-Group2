@@ -11,9 +11,10 @@ import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { MypageComponent } from './mypage/mypage.component';
 import { MaterializeModule } from 'angular2-materialize';
+import { UserAuthService } from "./_shared/services/user-auth.service";
+import { ProductsService } from "./_shared/services/products.service";
 import { ProductCreationComponent } from './product-creation/product-creation.component';
 
-import { UserAuthService } from './_shared/services/user-auth.service';
 import { NotFoundComponent } from './errors/not-found/not-found.component';
 
 /**
@@ -55,6 +56,12 @@ function init_app(userAuthService: UserAuthService) {
       multi: true,
     },
   ],
+<<<<<<< HEAD
+=======
+  providers: [UserAuthService,
+             ProductsService
+             ],
+>>>>>>> added product service to module, made 1st pass in product creation for calling api when creating products
   bootstrap: [AppComponent]
 })
 export class AppModule { }
