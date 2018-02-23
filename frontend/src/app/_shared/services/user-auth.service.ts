@@ -24,9 +24,9 @@ export class UserAuthService {
     };
 
     let url = '/api/user/login';
-    let obs = this.http.post(url, body).map((result) => new UserModel(result));
-    obs.do((result) => {this.currentUser = result; console.log('Current user: ' + this.currentUser)});
-    return obs;
+    return this.http.post(url, body)
+      .map(result => new UserModel(result))
+      .do(result => this.currentUser = result);
   }
 
   logout(): Observable<object>{
@@ -49,9 +49,9 @@ export class UserAuthService {
       return Observable.of(this.currentUser);
     }
     let url = '/api/user/current';
-    let obs = this.http.get(url).map((result) => new UserModel(result));
-    obs.do((result) => {this.currentUser = result; console.log('Current user: ' + this.currentUser)});
-    return obs;
+    return this.http.get(url)
+      .map(result => new UserModel(result))
+      .do(result => this.currentUser = result);
   }
 
 }
