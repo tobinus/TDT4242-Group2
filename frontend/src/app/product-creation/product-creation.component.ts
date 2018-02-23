@@ -38,4 +38,6 @@ export class ProductCreationComponent implements OnInit {
     
     // after observable object has done it's job, and it's confirmed that the product has been created in the backend, set this.loading to false and give the admin some "it has been made" message or something
   }
+  
+  
 }
