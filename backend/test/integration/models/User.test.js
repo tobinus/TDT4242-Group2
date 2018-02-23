@@ -1,6 +1,6 @@
 const should = require('should')
 
-describe('UserModel', () => {¨
+describe('UserModel', () => {
 
   const user = {
     email: 'test2@test.com',
