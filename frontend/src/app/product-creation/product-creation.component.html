@@ -1,7 +1,10 @@
 <div class="container">
   <h3>Product creation - admin site</h3>
   <div class="row">
-    <form class="col s12" (ngSubmit)="productForm.reset()" #productForm="ngForm">
+    <div class="progress" *ngIf="loading">
+      <div class="indeterminate"></div>
+    </div>
+    <form *ngIf="!loading" class="col s12" (ngSubmit)="createProduct(); productForm.reset();" #productForm="ngForm">
       <div class="row">
         <div class="input-field col s6">
           <label for="productname">Product name</label>
