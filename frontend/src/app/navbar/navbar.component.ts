@@ -29,15 +29,17 @@ export class NavbarComponent implements OnInit, OnDestroy {
   private messageToggle: string = 'A';
   private messageIndex: number = 0;
   private welcomeMessageList: string[] = [
-    'Welcome to our wonderful e-commerce site',
-    'Shop til you drop ... seriously',
-    'DevOps 4 life!',
-    'Be sure to check out our super deals!',
+    "Welcome to our wonderful e-commerce site",
+    "Shop til you drop ... seriously",
+    "DevOps 4 life!",
+    "Be sure to check out our super deals",
     "Buy something, please! We're about to go bankrupt...",
-    'Special stuff for special people',
+    "Special stuff for special people",
     "If we don't have it, you don't want it",
+    "FREE universal delivery (within the solar system)",
+    "Bitcoin? We don't take coins, just bits",
   ];
-  private welcomeMessageA: string = this.welcomeMessageList[0];
+  private welcomeMessageA: string = this.welcomeMessageList[this.messageIndex];
   private welcomeMessageB: string = '';
 
   constructor(
