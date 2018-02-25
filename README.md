@@ -74,3 +74,24 @@ Give user with :id admin privileges. Requires admin privileges.
 POST /api/user/:id/removeadmin
 ```
 Remove admin privileges from user with :id. Requires admin privileges.
+### Products
+```
+GET /api/product
+```
+Get list of all products. *URL params apply*
+```
+POST /api/product
+```
+Create a new product. Requires admin privileges.
+```
+GET /api/product/:id
+```
+Get details for product with :id.
+```
+PUT /api/product/:id
+```
+Update product with :id. Requires admin privileges.
+```
+DELETE /api/product/:id
+```
+Delete product with :id. Requires admin privileges.
