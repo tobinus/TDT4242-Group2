@@ -9,6 +9,19 @@ module.exports = {
 
   attributes: {
 
+    user: {
+      model: 'user'
+    },
+
+    products: {
+      collection: 'product',
+    },
+
+    total_price: {
+      type: 'float',
+      min: 0,
+    },
+
   }
 
 };
