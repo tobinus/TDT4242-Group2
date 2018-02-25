@@ -85,7 +85,7 @@ export class UserAuthService {
     return this.userAuthEvents.asObservable();
   }
 
-  
+
   /**
    * Stuff to do when a user logs in
    * @param {UserModel} user

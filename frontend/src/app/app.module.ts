@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -39,6 +40,7 @@ function init_app(userAuthService: UserAuthService) {
     FormsModule,
     HttpClientModule,
     MaterializeModule,
+    BrowserAnimationsModule,
   ],
   providers: [
     UserAuthService,
