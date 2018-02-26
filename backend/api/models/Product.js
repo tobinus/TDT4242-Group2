@@ -12,6 +12,7 @@ module.exports = {
     name: {
       type: 'string',
       required: true,
+      unique: true,
       notNull: true,
     },
 
@@ -42,13 +43,40 @@ module.exports = {
       defaultsTo: 1,
     },
 
+    package_get_count: {
+      type: 'integer',
+      defaultsTo: 1,
+      min: 1,
+    },
+
+    package_pay_count: {
+      type: 'integer',
+      defaultsTo: 1,
+      min: 0,
+    },
+
     on_sale: {
-      type: 'boolean',
-      defaultsTo: false,
+      type: 'string',
+      enum: [
+        'NO_SALE',
+        'PRICE_MOD',
+        'PACKAGE',
+      ],
+      defaultsTo: 'NO_SALE',
     },
 
     image: {
       type: 'binary',
+    },
+
+    stock_count: {
+      type: 'integer',
+      defaultsTo: 0,
+      min: 0,
+    },
+
+    stock_resupply_date: {
+      type: 'date',
     },
 
   }

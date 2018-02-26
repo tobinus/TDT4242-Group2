@@ -22,6 +22,17 @@ module.exports = {
       min: 0,
     },
 
+    status: {
+      type: 'string',
+      enum: [
+        'PENDING',
+        'ACCEPTED',
+        'AWAITING_RESUPPLY',
+        'SHIPPED',
+      ],
+      defaultsTo: 'PENDING',
+    },
+
   }
 
 };
