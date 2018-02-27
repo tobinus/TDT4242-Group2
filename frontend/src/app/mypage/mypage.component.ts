@@ -23,14 +23,19 @@ export class MypageComponent implements OnInit, OnDestroy {
   ngOnInit() {
     // Subscribe to login and logout user auth events
     this.userAuthEventsSub = this.userAuthService.getUserAuthEvents().subscribe(
-      user => {
-        this.currentUser = user;
-        if(user == null){
+      next => {
+        if (next.hasOwnProperty('isLoggedIn') && next['isLoggedIn']) {
+          // User logged in
+          this.userAuthService.getCurrentUser().subscribe(
+            user => this.currentUser = user,
+            error => {alert('An error occurred. Try again later.')}
+          );
+        } else if (next.hasOwnProperty('isLoggedIn') && !next['isLoggedIn']) {
+          // User logged out
+          this.currentUser = null;
           this.router.navigate(['/login']);
         }
-      }, err => {
-        alert('An error occurred. Try again later.')
-      }
+      },
     );
   }
 
