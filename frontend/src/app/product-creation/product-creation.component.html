@@ -1,0 +1,58 @@
+<div class="container">
+  <h3>Product creation - admin site</h3>
+  <div class="row">
+    <div class="progress" *ngIf="loading">
+      <div class="indeterminate"></div>
+    </div>
+    <form *ngIf="!loading" class="col s12" (ngSubmit)="createProduct(); productForm.reset();" #productForm="ngForm">
+      <div class="row">
+        <div class="input-field col s4">
+          <label for="productname">Product name</label>
+          <input
+            type="text" id="productname" name="productname" required
+            [(ngModel)]="prodCredentials.name"
+            #productname="ngModel"
+            class="validate"
+            placeholder="Product name"
+          />
+
+        </div>
+        <div class="input-field col s4">
+          <label for="manufacturer">Manufacturer</label>
+          <input
+            type="text" id="productManufacturer" name="productManufacturer" required
+            [(ngModel)]="prodCredentials.manufacturer"
+            #productManufacturer="ngModel"
+            class="validate"
+            placeholder="manufacturer"
+          />
+        </div>
+        <div class="input-field col s4">
+          <label for="unitPrice">Unit price</label>
+          <input
+            type="number" id="unitPrice" name="unitPrice" required
+            [(ngModel)]="prodCredentials.price"
+            #unitPrice="ngModel"
+            placeholder="unitPrice"
+          />
+        </div>
+
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <label for></label>
+          <textarea 
+            id="unitDesc" name="unitDesc" required
+            [(ngModel)]="prodCredentials.description" 
+            #unitDesc="ngModel"
+            placeholder="unit description"
+            class="materialize-textarea"
+          ></textarea>
+        </div>
+      </div>
+      <button type="submit" [disabled]="!productForm.form.valid" class="right">Create product</button>
+    </form>
+  </div>
+</div>
+
+

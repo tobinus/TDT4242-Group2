@@ -17,4 +17,19 @@ class UserModel{
 
 }
 
-export {UserModel}
+interface ProductModel{
+  id: number;
+  name: string;
+  price: number;
+  description: string;
+  manufacturer: string;
+  price_mod: number;
+  package_get_count: number;
+  package_pay_count: number;
+  on_sale: string;
+  stock_count: number;
+  stock_resupply_date: Date;
+  
+}
+
+export {UserModel, ProductModel}
