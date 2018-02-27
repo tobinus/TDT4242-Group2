@@ -28,9 +28,10 @@ export class ShoppingCartService {
             return prodService.getProduct(id);
           }, data.prodId, data.qty);
         }
-      }).filer((e) => e != null);
+      }).filter((e) => e != null);
       
-    } catch {
+    } catch(err) {
+      console.error(err);
       // Loading shopping cart failed
       this.cart = [];
     }

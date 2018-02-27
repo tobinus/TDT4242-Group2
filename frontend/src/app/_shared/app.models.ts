@@ -37,9 +37,10 @@ class ShoppingCartItem{
   private _prodId: number;
   private _qty: number;
   private _productResolver: Function;
-  constructor(_productResolver: Function, productId: number, qty :number = 1){
+  constructor(productResolver: Function, productId: number, qty :number = 1){
     this._prodId = productId;
     this._qty = qty;
+    this._productResolver = productResolver; 
   }
 
   public get productId() : number{
