@@ -7,7 +7,7 @@ version: 2
 jobs:
   build:
     docker:
- 
+
       - image: circleci/node:7.10
 
     working_directory: ~/repo/backend
@@ -28,7 +28,7 @@ jobs:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
-        
+
 
   test:
     docker:
