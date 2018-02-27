@@ -12,7 +12,10 @@ import { LoginComponent } from './login/login.component';
 import { MypageComponent } from './mypage/mypage.component';
 import { MaterializeModule } from 'angular2-materialize';
 
-import { UserAuthService } from './_shared/services/user-auth.service';
+import { UserAuthService } from "./_shared/services/user-auth.service";
+import { ProductsService } from "./_shared/services/products.service";
+import { ProductCreationComponent } from './product-creation/product-creation.component';
+
 import { NotFoundComponent } from './errors/not-found/not-found.component';
 import { DealsComponent } from './deals/deals.component';
 import { ProductListComponent } from './product-list/product-list.component';
@@ -41,6 +44,7 @@ function init_app(userAuthService: UserAuthService) {
     LoginComponent,
     MypageComponent,
     NotFoundComponent,
+    ProductCreationComponent,
     DealsComponent,
     ProductListComponent,
     ProductContainerComponent,
@@ -58,6 +62,7 @@ function init_app(userAuthService: UserAuthService) {
   ],
   providers: [
     UserAuthService,
+    ProductsService,
     {
       provide: APP_INITIALIZER,
       useFactory: init_app,

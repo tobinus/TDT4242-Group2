@@ -13,7 +13,7 @@ import { UserModel } from "../app.models";
 export class UserAuthService {
 
   private currentUser: UserModel = null;
-  private userAuthEvents: BehaviorSubject<object> = new BehaviorSubject({isLoggedIn: false});
+  private userAuthEvents: BehaviorSubject<UserModel> = new BehaviorSubject(null);
 
   constructor(
     private http: HttpClient,
@@ -81,7 +81,7 @@ export class UserAuthService {
    * Return an observable that can be subscribed to and listen for login or logout events
    * @returns {Observable<Object>}
    */
-  getUserAuthEvents(): Observable<object> {
+  getUserAuthEvents(): Observable<UserModel> {
     return this.userAuthEvents.asObservable();
   }
 
@@ -92,7 +92,7 @@ export class UserAuthService {
    */
   private userLoggedIn(user: UserModel): void {
     this.currentUser = user;
-    this.userAuthEvents.next({isLoggedIn: true});
+    this.userAuthEvents.next(user);
   }
 
   /**
@@ -100,7 +100,6 @@ export class UserAuthService {
    */
   private userLoggedOut(): void {
     this.currentUser = null;
-    this.userAuthEvents.next({isLoggedIn: false});
+    this.userAuthEvents.next(null);
   }
-
 }
