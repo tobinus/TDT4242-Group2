@@ -5,8 +5,23 @@ import { RegisterComponent } from "./register/register.component";
 import { LoginComponent } from "./login/login.component";
 import { MypageComponent } from "./mypage/mypage.component";
 import { NotFoundComponent} from "./errors/not-found/not-found.component";
+import { DealsComponent } from "./deals/deals.component";
+import { ProductContainerComponent } from "./product-container/product-container.component";
+import { ShoppingCartComponent } from "./shopping-cart/shopping-cart.component";
 
 const appRoutes: Routes = [
+  {
+    path: '',
+    component: DealsComponent,
+  },
+  {
+    path: 'products',
+    component: ProductContainerComponent,
+  },
+  {
+    path: 'cart',
+    component: ShoppingCartComponent,
+  },
   {
     path: "register",
     component: RegisterComponent,
