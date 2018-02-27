@@ -4,4 +4,4 @@
 
 <app-product-filter></app-product-filter>
 
-<app-product-list></app-product-list>
+<app-product-list [productList]="movies" (nextPageCb)="getNextProducts($event)" on></app-product-list>
