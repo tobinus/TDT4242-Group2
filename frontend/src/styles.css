@@ -1,1 +1,24 @@
 /* You can add global styles to this file, and also import other style files */
+html {
+  line-height: 1.15;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  margin: 0 0 -8px 0 !important;
+  padding-top: 20px;
+  font-size: 36pt !important;
+}
+
+h2 {
+  font-size: 20pt !important;
+}
+
+.content-width {
+  max-width: 1000px;
+  margin: auto;
+}

@@ -1,0 +1,33 @@
+<div class="container">
+  <div *ngIf="!isLoggedIn" class="row">
+    <form class="col s12" (ngSubmit)="login(); loginForm.reset();" #loginForm="ngForm">
+      <div class="row">
+        <div class="input-field col s6">
+
+          <label for="email">e-mail</label>
+          <input
+            type="email" id="email" name="email" required
+            pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
+            [(ngModel)]="userCredentials.email"
+            #email="ngModel"
+            class="validate"
+            placeholder="e-mail"
+          />
+
+        </div>
+        <div class="input-field col s6">
+          <label for="password">password</label>
+          <input
+            type="password" id="password" name="password" required
+            [(ngModel)]="userCredentials.password"
+            #password="ngModel"
+            placeholder="password"
+          />
+        </div>
+
+      </div>
+      <button type="submit" [disabled]="!loginForm.form.valid" class="btn right">Log in</button>
+    </form>
+  </div>
+  <a class="right" routerLink="/register" routerLinkActive="active-link">Create new account</a>
+</div>

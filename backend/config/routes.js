@@ -32,9 +32,9 @@ module.exports.routes = {
   *                                                                          *
   ***************************************************************************/
 
-  '/': {
-    view: 'homepage'
-  }
+  // '/': {
+  //   view: 'homepage'
+  // }
 
   /***************************************************************************
   *                                                                          *
@@ -45,5 +45,17 @@ module.exports.routes = {
   * for configuration options and examples.                                  *
   *                                                                          *
   ***************************************************************************/
+
+  'POST /api/user/login': 'UserController.login',
+  'POST /api/user/logout': 'UserController.logout',
+  'GET /api/user/current': 'UserController.current',
+  'POST /api/user/:id/makeadmin': 'UserController.makeAdmin',
+  'POST /api/user/:id/removeadmin': 'UserController.removeAdmin',
+
+  // Catch all but static assets for angular frontend
+  'GET r|^\/(?!api).+|': {
+    view: 'index',
+    skipAssets: true
+  },
 
 };
