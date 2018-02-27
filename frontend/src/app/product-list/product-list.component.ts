@@ -9,6 +9,9 @@ export class ProductListComponent implements OnInit {
 
   @Input()
   productList = [];
+  @Input()
+  loading: boolean;
+  
   constructor() { }
 
   ngOnInit() {

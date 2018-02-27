@@ -1,13 +1,36 @@
-<ul class="collection with-header">
-  <li class="collection-header"><h4>Products</h4></li>
-  <li class="collection-item" *ngFor="let product of productList">
-    <p>{{product.name}} - {{product.unitPrice}}</p>
-    <div>
-      <p><em>{{product.manufacturer}}</em></p>
-      <p>{{product.description}}</p>
+<div class="row">
+  <ul class="collection with-header"
+    infinite-scroll
+    [infiniteScrollDistance]="2"
+    [infiniteScrollThrottle]="10"
+    (scrolled)= "nextPageCb.emit()"
+    >
+    <li class="collection-header"><h4>Products</h4></li>
+    <li class="collection-item" *ngFor="let product of productList">
+      <p>{{product.name}} - {{product.price}}kr</p>
+      <div>
+        <p><em>{{product.manufacturer}}</em></p>
+        <p>{{product.description}}</p>
+      </div>
+      <button (click)="addToCart()">Buy now</button>
+    </li>
+  </ul>
+</div>
+<div class="row col s12">
+  <div class="center-align">
+    <div *ngIf="loading" class="preloader-wrapper small active">
+      <div class="spinner-layer spinner-green-only">
+        <div class="circle-clipper left">
+          <div class="circle"></div>
+        </div><div class="gap-patch">
+          <div class="circle"></div>
+        </div><div class="circle-clipper right">
+          <div class="circle"></div>
+        </div>
+      </div>
     </div>
-    <button (click)="addToCart()">Buy now</button>
-  </li>
-</ul>
+  </div>
+</div>
 
-<button (click)="nextPageCb.emit()">load more products</button>
+
+<!--<button (click)="nextPageCb.emit()">load more products</button>-->

@@ -11,6 +11,7 @@ import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { MypageComponent } from './mypage/mypage.component';
 import { MaterializeModule } from 'angular2-materialize';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 import { UserAuthService } from "./_shared/services/user-auth.service";
 import { ProductsService } from "./_shared/services/products.service";
@@ -59,6 +60,7 @@ function init_app(userAuthService: UserAuthService) {
     HttpClientModule,
     MaterializeModule,
     BrowserAnimationsModule,
+    InfiniteScrollModule,
   ],
   providers: [
     UserAuthService,
