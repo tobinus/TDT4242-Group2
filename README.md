@@ -72,12 +72,10 @@ Password must be 8 to 72 characters.
 GET /api/user
 ```
 Get the list of all users. Requires admin privileges.
-<!--
 ```
-GET /api/user/:id
+GET /api/user/:id?populate=purchase_history
 ```
-Get user details for user with :id.
--->
+Get user details with purchase history for user with :id.
 ```
 DELETE /api/user/:id
 ```

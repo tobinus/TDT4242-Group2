@@ -53,7 +53,7 @@ module.exports.policies = {
     '*': false,
     create: true,
     find: 'isAdmin',
-    findOne: false,
+    findOne: 'isSelf',
     destroy: 'isAdmin',
     populate: false,
     login: true,
