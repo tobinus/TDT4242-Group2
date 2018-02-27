@@ -12,7 +12,7 @@
         <p><em>{{product.manufacturer}}</em></p>
         <p>{{product.description}}</p>
       </div>
-      <button (click)="addToCart()">Buy now</button>
+      <button (click)="addToCart(product.id)">Buy now</button>
     </li>
   </ul>
 </div>

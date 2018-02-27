@@ -21,8 +21,11 @@ export class ProductListComponent implements OnInit {
   nextPageCb = new EventEmitter();
   
   
-  addToCart(){
-    // add item to cart
-    alert("add item to cart");
+  addToCart(id){
+    // adding item ID to cart
+    let cart = (localStorage.getItem("shopping-cart")) ? JSON.parse(localStorage.getItem("shopping-cart")) : ([])
+    cart.push(id);
+    localStorage.setItem("shopping-cart", JSON.stringify(cart));
+    Materialize.toast('Item added to shopping cart', 4000)
   }
 }
