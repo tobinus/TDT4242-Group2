@@ -1,3 +1,5 @@
+import { Observable } from "rxjs/Observable";
+
 
 class UserModel{
 
@@ -29,7 +31,32 @@ interface ProductModel{
   on_sale: string;
   stock_count: number;
   stock_resupply_date: Date;
-  
 }
 
-export {UserModel, ProductModel}
+class ShoppingCartItem{
+  private _prodId: number;
+  private _qty: number;
+  private _productResolver: Function;
+  constructor(_productResolver: Function, productId: number, qty :number = 1){
+    this._prodId = productId;
+    this._qty = qty;
+  }
+
+  public get productId() : number{
+    return this._prodId;
+  }
+
+  public get product() : Observable<ProductModel>{
+    return this._productResolver(this._prodId);
+  }
+
+  public get quantity(){
+    return this._qty;
+  }
+
+  public set quantity(qty: number){
+    this._qty = qty;
+  }
+}
+
+export {UserModel, ProductModel, ShoppingCartItem}
