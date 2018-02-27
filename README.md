@@ -1,7 +1,35 @@
 # TDT4242 Group2
 Shop til you drop devops and webapp project for TDT4242 2018.
 
-(Something about which folders are relevant for code review)
+TOC
+* [Code review info](#code-review-info)
+* [Development setup](#development-setup)
+* [API reference](#api-reference)
+
+## Code review info
+Some useful info for those who should review our code. (link to site)
+### Backend
+Our server is based on the [Sails](https://sailsjs.com/) framework which exposes a somewhat RESTful API. The backend folder includes a lot of generated files, so we have listed the most relevant folders and files that we have edited. Sails blueprints mostly handle the regular CRUD operations, so *don't panic* if you can't find any code for them. Permissions for these operations are defined in `policies.js`.
+```
+backend
+├─ api
+│  ├─ controllers
+│  │  └─ *
+│  ├─ models
+│  │  └─ *
+│  └─ policies
+│     └─ *
+└─ config
+   ├─ blueprints.js
+   ├─ connections.js
+   ├─ models.js
+   ├─ policies.js
+   └─ routes.js
+```
+More details on the app structure can be found in the [Sails docs](https://sailsjs.com/documentation/anatomy).
+### Frontend
+Built with [Angular 5](https://angular.io/). Everything in `frontend/src/app` basically.
+Angular docs have more on the [src folder structure](https://angular.io/guide/quickstart#the-src-folder).
 
 ## Development setup
 Do the following steps to set up and run the app for development. Functionality is dependent on having the backend up and running.
@@ -74,3 +102,24 @@ Give user with :id admin privileges. Requires admin privileges.
 POST /api/user/:id/removeadmin
 ```
 Remove admin privileges from user with :id. Requires admin privileges.
+### Products
+```
+GET /api/product
+```
+Get list of all products. *URL params apply*
+```
+POST /api/product
+```
+Create a new product. Requires admin privileges.
+```
+GET /api/product/:id
+```
+Get details for product with :id.
+```
+PUT /api/product/:id
+```
+Update product with :id. Requires admin privileges.
+```
+DELETE /api/product/:id
+```
+Delete product with :id. Requires admin privileges.

@@ -13,9 +13,11 @@ module.exports = function(req, res, next) {
     return res.unauthorized({error: 'Not logged in'});
   }
 
+  // Find the logged in user and check if admin
   User.findOne(req.session.userId).exec(function (err, user) {
     if (err) return res.negotiate(err);
     if (!user) {
+      // User isn't found so log out
       req.session.authenticated = false;
       req.session.userId = null;
       return res.unauthorized({error: 'Not logged in'});
