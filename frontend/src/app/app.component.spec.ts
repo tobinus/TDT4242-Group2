@@ -3,7 +3,7 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from "./navbar/navbar.component";
 import { RouterTestingModule } from "@angular/router/testing";
 
-describe('AppComponent', () => {
+xdescribe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
