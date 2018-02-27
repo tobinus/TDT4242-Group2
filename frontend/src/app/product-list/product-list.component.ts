@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-product-list',
@@ -7,9 +7,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProductListComponent implements OnInit {
 
+  @Input()
+  productList = [];
   constructor() { }
 
   ngOnInit() {
   }
 
+  @Output()
+  nextPageCb = new EventEmitter();
+  
+  
+  addToCart(){
+    // add item to cart
+    alert("add item to cart");
+  }
 }
