@@ -13,6 +13,7 @@ import { MypageComponent } from './mypage/mypage.component';
 import { MaterializeModule } from 'angular2-materialize';
 
 import { UserAuthService } from './_shared/services/user-auth.service';
+import { NotFoundComponent } from './errors/not-found/not-found.component';
 
 /**
  * Initialize app and check if a user is logged in
@@ -32,7 +33,8 @@ function init_app(userAuthService: UserAuthService) {
     NavbarComponent,
     RegisterComponent,
     LoginComponent,
-    MypageComponent
+    MypageComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,

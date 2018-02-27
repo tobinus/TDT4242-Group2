@@ -1,11 +1,10 @@
 const request = require('supertest')
 const should = require('should')
 
-
 describe('UserController', () => {
 
   /* Wrap for request */
-  const post = (url, data, code, cookie = '') => request(sails.hooks.http.app).post(url).send(data).expect(code)
+  const post = (url, data, code, cookie = '') => request(sails.hooks.http.app).post(url).set('Cookie', cookie).send(data).expect(code)
   const get = (url, code, cookie = '') => request(sails.hooks.http.app).get(url).set('Cookie', cookie).expect(code)
 
   const api = {
@@ -76,14 +75,15 @@ describe('UserController', () => {
   describe('Auth', () => {
     let cookie
 
-    it('should get cookie after login', async () => {
-      await post(api.login, user, code.ok).then((res) => {
-        should.exist(res.header['set-cookie']) // cookie
-        cookie = res.headers['set-cookie']
-      })
-    })
-
     describe('Normal', () => {
+
+      // Get cookie
+      it('should get cookie after login', async () => {
+        await post(api.login, user, code.ok).then((res) => {
+          should.exist(res.header['set-cookie']) // cookie
+          cookie = res.headers['set-cookie']
+        })
+      })
 
       it('should get user', async () => {
         await get(api.user, code.ok, cookie).then((res) => {
@@ -92,7 +92,7 @@ describe('UserController', () => {
       })
 
       it('should logout', async () => {
-        await post(api.logout, {}, code.ok).then((res) => {
+        await post(api.logout, {}, code.ok, cookie).then((res) => {
           should.exist(res.text) // logged out text
         })
       })
@@ -100,6 +100,15 @@ describe('UserController', () => {
 
     describe('Admin', () => {
       let users
+
+      // Get new cookie
+      it('should get cookie after login', async () => {
+        await post(api.login, user, code.ok).then((res) => {
+          should.exist(res.header['set-cookie']) // cookie
+          cookie = res.headers['set-cookie']
+        })
+      })
+
       describe('get users', () => {
         it('should get users', async () => {
           await get(api.users, code.ok, cookie).then((res) => {

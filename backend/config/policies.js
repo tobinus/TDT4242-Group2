@@ -57,10 +57,20 @@ module.exports.policies = {
     destroy: 'isAdmin',
     populate: false,
     login: true,
-    logout: true,
+    logout: 'sessionAuth',
     current: true,
     makeAdmin: 'isAdmin',
     removeAdmin: 'isAdmin',
-  }
+  },
+
+  ProductController: {
+    '*': false,
+    create: 'isAdmin',
+    find: true,
+    findOne: true,
+    update: 'isAdmin',
+    destroy: 'isAdmin',
+    populate: false,
+  },
 
 };

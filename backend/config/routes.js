@@ -52,4 +52,10 @@ module.exports.routes = {
   'POST /api/user/:id/makeadmin': 'UserController.makeAdmin',
   'POST /api/user/:id/removeadmin': 'UserController.removeAdmin',
 
+  // Catch all but static assets for angular frontend
+  'GET r|^\/(?!api).+|': {
+    view: 'index',
+    skipAssets: true
+  },
+
 };

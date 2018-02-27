@@ -46,7 +46,7 @@ module.exports = {
       User.findOne(req.session.userId).exec(function (err, user) {
         if (err) return res.negotiate(err);
         if (!user) {
-          // Something wrong so log out
+          // User not found so log out
           req.session.authenticated = false;
           req.session.userId = null;
           return res.unauthorized({error: 'Not logged in'});

@@ -30,6 +30,11 @@ module.exports = {
       defaultsTo: false
     },
 
+    purchase_history: {
+      collection: 'purchase',
+      via: 'user',
+    },
+
     toJSON: function() {
       let obj = this.toObject();
       // Do not expose password hash to the world
