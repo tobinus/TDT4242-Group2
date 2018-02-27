@@ -14,6 +14,12 @@ import { MaterializeModule } from 'angular2-materialize';
 
 import { UserAuthService } from './_shared/services/user-auth.service';
 import { NotFoundComponent } from './errors/not-found/not-found.component';
+import { DealsComponent } from './deals/deals.component';
+import { ProductListComponent } from './product-list/product-list.component';
+import { ProductContainerComponent } from './product-container/product-container.component';
+import { ProductFilterComponent } from './product-filter/product-filter.component';
+import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
+import { ShoppingCartListComponent } from './shopping-cart-list/shopping-cart-list.component';
 
 /**
  * Initialize app and check if a user is logged in
@@ -34,7 +40,13 @@ function init_app(userAuthService: UserAuthService) {
     RegisterComponent,
     LoginComponent,
     MypageComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    DealsComponent,
+    ProductListComponent,
+    ProductContainerComponent,
+    ProductFilterComponent,
+    ShoppingCartComponent,
+    ShoppingCartListComponent
   ],
   imports: [
     BrowserModule,
