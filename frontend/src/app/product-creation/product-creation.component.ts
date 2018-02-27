@@ -2,7 +2,7 @@ import { Component, OnInit, Input} from '@angular/core';
 
 import { ProductsService } from '../_shared/services/products.service';
 
-import { ProductModel } from "../app.models";
+import { ProductModel } from "../_shared/app.models";
 
 @Component({
   selector: 'app-product-creation',
@@ -14,7 +14,7 @@ export class ProductCreationComponent implements OnInit {
   constructor(private prodService: ProductsService,) { }
 
   
-  prodCredentials: ProductModel;
+  prodCredentials: object;
   
   loading: boolean;
   
@@ -22,7 +22,7 @@ export class ProductCreationComponent implements OnInit {
     this.loading = false;
     this.prodCredentials= {
       name: "",
-      unitPrice: 0,
+      price: 0,
       description: "",
       manufacturer: ""
     }
