@@ -25,6 +25,8 @@ import { ProductFilterComponent } from './product-filter/product-filter.componen
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { ShoppingCartListComponent } from './shopping-cart-list/shopping-cart-list.component';
 
+import { ShoppingCartService } from './_shared/services/shopping-cart.service';
+
 /**
  * Initialize app and check if a user is logged in
  * @param {UserAuthService} userAuthService
@@ -65,6 +67,7 @@ function init_app(userAuthService: UserAuthService) {
   providers: [
     UserAuthService,
     ProductsService,
+    ShoppingCartService,
     {
       provide: APP_INITIALIZER,
       useFactory: init_app,

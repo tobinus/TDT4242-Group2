@@ -1,3 +1,17 @@
-<p>
-  shopping-cart-list works!
-</p>
+<div class="row">
+  <ul class="collection with-header">
+    <li class="collection-header"><h4>Shopping Cart</h4></li>
+    <li class="collection-item" *ngFor="let item of cartList">
+      <div *ngIf="productLoaded(item)">
+        <p>{{product(item).name}} - {{product(item).price}}kr x{{item.quantity}} </p>
+        <div>
+          <p><em>{{product(item).manufacturer}}</em></p>
+          <p>{{product(item).description}}</p>
+        </div>
+      </div>
+      <div *ngIf="!productLoaded(item)" class="progress">
+          <div class="indeterminate"></div>
+      </div> 
+    </li>
+  </ul>
+</div>

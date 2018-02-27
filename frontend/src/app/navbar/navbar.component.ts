@@ -4,6 +4,8 @@ import { trigger, state, style, transition, animate} from '@angular/animations';
 
 import { UserAuthService } from "../_shared/services/user-auth.service";
 
+import { ShoppingCartService } from "../_shared/services/shopping-cart.service";
+
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
@@ -28,6 +30,9 @@ export class NavbarComponent implements OnInit, OnDestroy {
   private userAuthEventsSub: Subscription;
   private messageToggle: string = 'A';
   private messageIndex: number = 0;
+
+  private itemsInCart = 0;
+
   private welcomeMessageList: string[] = [
     "Welcome to our wonderful e-commerce site",
     "Shop til you drop ... seriously",
@@ -44,12 +49,17 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   constructor(
     private userAuthService: UserAuthService,
+    private shoppingCart : ShoppingCartService,
   ) { }
 
   ngOnInit() {
     // Subscribe to login and logout user auth events and update whether a user is logged in or not
     this.userAuthEventsSub = this.userAuthService.getUserAuthEvents().subscribe(next => {
       if (next.hasOwnProperty('isLoggedIn')) this.isLoggedIn = next['isLoggedIn'];
+    });
+
+    this.shoppingCart.getShoppingCart().subscribe((cart) => {
+      this.itemsInCart = cart.length;
     });
 
     setInterval(() => {

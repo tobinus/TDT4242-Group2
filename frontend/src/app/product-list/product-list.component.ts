@@ -1,4 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import Materialize from "materialize-css";
+
+import { ShoppingCartService } from '../_shared/services/shopping-cart.service';
 
 @Component({
   selector: 'app-product-list',
@@ -12,7 +15,7 @@ export class ProductListComponent implements OnInit {
   @Input()
   loading: boolean;
   
-  constructor() { }
+  constructor(private shoppingCart : ShoppingCartService) { }
 
   ngOnInit() {
   }
@@ -20,12 +23,9 @@ export class ProductListComponent implements OnInit {
   @Output()
   nextPageCb = new EventEmitter();
   
-  
   addToCart(id){
+    this.shoppingCart.addItem(id);
     // adding item ID to cart
-    let cart = (localStorage.getItem("shopping-cart")) ? JSON.parse(localStorage.getItem("shopping-cart")) : ([])
-    cart.push(id);
-    localStorage.setItem("shopping-cart", JSON.stringify(cart));
-    Materialize.toast('Item added to shopping cart', 4000)
+
   }
 }
