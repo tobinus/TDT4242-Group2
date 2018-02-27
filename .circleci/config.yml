@@ -4,18 +4,13 @@
 # 
 version: 2
 
-general:
-  branches:
-    only:
-      - master
-
 jobs:
   build:
     docker:
- 
+
       - image: circleci/node:7.10
 
-    working_directory: ~/backend
+    working_directory: ~/repo/backend
 
     steps:
       - checkout
@@ -33,13 +28,13 @@ jobs:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
-        
+
 
   test:
     docker:
       - image: circleci/node:7.10
 
-    working_directory: ~/backend
+    working_directory: ~/repo/backend
 
     steps:
       - checkout
@@ -89,4 +84,6 @@ workflows:
           requires:
             - build
             - test
-
+          branches:
+            only:
+              - master
