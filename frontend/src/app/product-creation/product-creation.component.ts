@@ -1,8 +1,8 @@
 import { Component, OnInit, Input} from '@angular/core';
 
-import { ProductsService } from 'app/_shared/services/products.service';
+import { ProductsService } from '../_shared/services/products.service';
 
-import { ProductModel } from "app/_shared/app.models";
+import { ProductModel } from "../app.models";
 
 @Component({
   selector: 'app-product-creation',
@@ -20,27 +20,13 @@ export class ProductCreationComponent implements OnInit {
   
   ngOnInit() {
     this.loading = false;
-    /*this.prodCredentials= {
-      id: -1,
+    this.prodCredentials= {
       name: "",
-      price: 0,
+      unitPrice: 0,
       description: "",
       manufacturer: ""
-    }*/
+    }
   }
-
-  /*
-    id: number;
-  name: string;
-  price: number;
-  description: string;
-  manufacturer: string;
-  price_mod: number;
-  package_get_count: number;
-  package_pay_count: number;
-  on_sale: string;
-  stock_count: number;
-  stock_resupply_date: Date; */
   createProduct(){
     this.loading = true;
     // call product service to create a product

@@ -2,8 +2,6 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 import { trigger, state, style, transition, animate} from '@angular/animations';
 
-import { UserModel } from '.. /_shared/app.models';
-
 import { UserAuthService } from "../_shared/services/user-auth.service";
 
 @Component({
@@ -26,7 +24,7 @@ import { UserAuthService } from "../_shared/services/user-auth.service";
 export class NavbarComponent implements OnInit, OnDestroy {
 
   private title: string = 'SPESIALBUA';
-  private user: UserModel = null;
+  private isLoggedIn: boolean = false;
   private userAuthEventsSub: Subscription;
   private messageToggle: string = 'A';
   private messageIndex: number = 0;
@@ -50,8 +48,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     // Subscribe to login and logout user auth events and update whether a user is logged in or not
-    this.userAuthEventsSub = this.userAuthService.getUserAuthEvents().subscribe(user => {
-      this.user = user;
+    this.userAuthEventsSub = this.userAuthService.getUserAuthEvents().subscribe(next => {
+      if (next.hasOwnProperty('isLoggedIn')) this.isLoggedIn = next['isLoggedIn'];
     });
 
     setInterval(() => {
