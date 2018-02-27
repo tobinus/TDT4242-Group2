@@ -2,6 +2,8 @@ import { Component, OnInit, Input} from '@angular/core';
 
 import { ProductsService } from '../_shared/services/products.service';
 
+import { ProductModel } from "../app.models";
+
 @Component({
   selector: 'app-product-creation',
   templateUrl: './product-creation.component.html',
@@ -12,23 +14,24 @@ export class ProductCreationComponent implements OnInit {
   constructor(private prodService: ProductsService,) { }
 
   
-  prodCredentials = {
-    name: "",
-    unitPrice: 0,
-    description: "",
-    manufacturer: ""
-  }
+  prodCredentials: ProductModel;
   
   loading: boolean;
   
   ngOnInit() {
     this.loading = false;
+    this.prodCredentials= {
+      name: "",
+      unitPrice: 0,
+      description: "",
+      manufacturer: ""
+    }
   }
   createProduct(){
     this.loading = true;
     // call product service to create a product
     //name, unitprice, description
-    this.prodService.postProduct(this.prodCredentials.name, this.prodCredentials.unitPrice, this.prodCredentials.description, this.prodCredentials.manufacturer).subscribe(res => {
+    this.prodService.postProduct(this.prodCredentials).subscribe(res => {
       console.log(res);
       this.loading = false;
     }, err => {

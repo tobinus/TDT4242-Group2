@@ -19,7 +19,7 @@ export class ProductsService {
   
   /* getting 1 product based on ID */
   getProduct(id: number): Observable<ProductModel> {
-    return this.http.get('/api/product/' + id).map(result => new ProductModel(result));
+    return this.http.get<ProductModel>('/api/product/' + id);
   }
   
   /* getting all product objects, with no skip or limit */
@@ -37,22 +37,16 @@ export class ProductsService {
   
   /* private method to reduce redundansy on getters */
   private getProducts(url: string): Observable<ProductModel[]>{
-    return this.http.get(url).map(response => response as ProductModel[])
+    return this.http.get<ProductModel[]>(url)
     
   }
   
   // ----------- posters -----------
   
   /* post a new product to the backend */
-  postProduct(name, unitprice, description, manufacturer): Observable<Object> {
-    let body = {
-      name: name,
-      price: unitprice,
-      description: description,
-      manufacturer: manufacturer
-    }
+  postProduct(product: ProductModel): Observable<Object> {
     let url = '/api/product';
-    return this.http.post(url, body);
+    return this.http.post(url, product);
     
   }
 

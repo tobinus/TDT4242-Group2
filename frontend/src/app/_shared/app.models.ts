@@ -17,7 +17,7 @@ class UserModel{
 
 }
 
-class ProductModel{
+interface ProductModel{
   id: number;
   name: string;
   price: number;
@@ -29,20 +29,6 @@ class ProductModel{
   on_sale: string;
   stock_count: number;
   stock_resupply_date: Date;
-  
-  constructor(product){
-    this.id = product.id;
-    this.name = product.name;
-    this.price = product.price;
-    this.description = product.description;
-    this.manufacturer = product.manufacturer;
-    this.price_mod = product.price_mod;
-    this.package_get_count = product.package_get_count;
-    this.package_pay_count = product.package_pay_count;
-    this.on_sale = product.on_sale;
-    this.stock_count = product.stock_count;
-    this.stock_resupply_date = product.stock_resupply_date;
-  }
   
 }
 
