@@ -16,6 +16,7 @@ export class ProductCreationComponent implements OnInit {
     name: "",
     unitPrice: 0,
     description: "",
+    manufacturer: ""
   }
   
   loading: boolean;
@@ -27,7 +28,7 @@ export class ProductCreationComponent implements OnInit {
     this.loading = true;
     // call product service to create a product
     //name, unitprice, description
-    this.prodService.postProduct(this.prodCredentials.name, this.prodCredentials.unitPrice, this.prodCredentials.description).subscribe(res => {
+    this.prodService.postProduct(this.prodCredentials.name, this.prodCredentials.unitPrice, this.prodCredentials.description, this.prodCredentials.manufacturer).subscribe(res => {
       console.log(res);
       this.loading = false;
     }, err => {

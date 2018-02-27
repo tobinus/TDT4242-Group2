@@ -6,26 +6,37 @@
     </div>
     <form *ngIf="!loading" class="col s12" (ngSubmit)="createProduct(); productForm.reset();" #productForm="ngForm">
       <div class="row">
-        <div class="input-field col s6">
+        <div class="input-field col s4">
           <label for="productname">Product name</label>
           <input
             type="text" id="productname" name="productname" required
-            [(ngModel)]="prodCredentials.productname"
+            [(ngModel)]="prodCredentials.name"
             #productname="ngModel"
             class="validate"
             placeholder="Product name"
           />
 
         </div>
-        <div class="input-field col s6">
+        <div class="input-field col s4">
+          <label for="manufacturer">Manufacturer</label>
+          <input
+            type="text" id="productManufacturer" name="productManufacturer" required
+            [(ngModel)]="prodCredentials.manufacturer"
+            #productManufacturer="ngModel"
+            class="validate"
+            placeholder="manufacturer"
+          />
+        </div>
+        <div class="input-field col s4">
           <label for="unitPrice">Unit price</label>
           <input
             type="number" id="unitPrice" name="unitPrice" required
-            [(ngModel)]="prodCredentials.unitPrice"
+            [(ngModel)]="prodCredentials.price"
             #unitPrice="ngModel"
             placeholder="unitPrice"
           />
         </div>
+
       </div>
       <div class="row">
         <div class="input-field col s12">

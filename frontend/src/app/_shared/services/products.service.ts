@@ -44,11 +44,12 @@ export class ProductsService {
   // ----------- posters -----------
   
   /* post a new product to the backend */
-  postProduct(name, unitprice, description): Observable<Object> {
+  postProduct(name, unitprice, description, manufacturer): Observable<Object> {
     let body = {
       name: name,
       price: unitprice,
       description: description,
+      manufacturer: manufacturer
     }
     let url = '/api/product';
     return this.http.post(url, body);
