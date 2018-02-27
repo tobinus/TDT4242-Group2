@@ -4,6 +4,7 @@ import { RouterModule, Routes } from "@angular/router"
 import { RegisterComponent } from "./register/register.component";
 import { LoginComponent } from "./login/login.component";
 import { MypageComponent } from "./mypage/mypage.component";
+import { NotFoundComponent} from "./errors/not-found/not-found.component";
 
 const appRoutes: Routes = [
   {
@@ -18,6 +19,12 @@ const appRoutes: Routes = [
     path: "mypage",
     component: MypageComponent,
   },
+
+  // Keep last
+  {
+    path: "**",
+    component: NotFoundComponent,
+  }
 ];
 
 @NgModule({
