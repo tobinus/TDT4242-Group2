@@ -15,9 +15,9 @@
       </ul>
       <ul class="nav-list">
         <li class="waves-effect"><a routerLink="/cart">Shopping cart<span class="badge grey-text">(5)</span></a></li>
-        <li *ngIf="!isLoggedIn" class="waves-effect"><a routerLink="/login">Log in</a></li>
-        <li *ngIf="isLoggedIn" class="waves-effect"><a routerLink="/mypage">My page</a></li>
-        <li *ngIf="isLoggedIn" class="waves-effect"><a (click)="logout()">Log out</a></li>
+        <li *ngIf="!user" class="waves-effect"><a routerLink="/login">Log in</a></li>
+        <li *ngIf="user" class="waves-effect"><a routerLink="/mypage">My page</a></li>
+        <li *ngIf="user" class="waves-effect"><a (click)="logout()">Log out</a></li>
       </ul>
     </div>
   </nav>

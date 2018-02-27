@@ -1,5 +1,5 @@
 <div class="container">
-  <div *ngIf="!isLoggedIn" class="row">
+  <div *ngIf="!user" class="row">
     <form class="col s12" (ngSubmit)="login(); loginForm.reset();" #loginForm="ngForm">
       <div class="row">
         <div class="input-field col s6">
