@@ -9,7 +9,7 @@ jobs:
  
       - image: circleci/node:7.10
 
-    working_directory: ~/repo
+    working_directory: ~/repo/backend
 
     steps:
       - checkout
@@ -17,17 +17,17 @@ jobs:
       # Download and cache dependencies
       - restore_cache:
           keys:
-          - v1-dependencies-{{ checksum "backend/package.json" }}
+          - v1-dependencies-{{ checksum "package.json" }}
           # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
 
+      - run: pwd
       - run: cd backend && yarn install
-      - run: cd frontend && yarn install
 
       - save_cache:
           paths:
             - node_modules
-          key: v1-dependencies-{{ checksum "backend/package.json" }}
+          key: v1-dependencies-{{ checksum "package.json" }}
         
 
   test:
@@ -41,12 +41,12 @@ jobs:
 
       - restore_cache:
           keys:
-          - v1-dependencies-{{ checksum "backend/package.json" }}
+          - v1-dependencies-{{ checksum "package.json" }}
           # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
 
       - run: pwd
-      - run: yarn test
+      - run: cd backend && yarn test
 
 
   deploy:
