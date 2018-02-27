@@ -21,8 +21,8 @@ jobs:
           # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
 
-      - run: cd backend yarn install
-      - run: cd frontend yarn install
+      - run: cd backend && yarn install
+      - run: cd frontend && yarn install
 
       - save_cache:
           paths:
@@ -45,8 +45,8 @@ jobs:
           # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
 
-      - run: cd backend yarn test
-      - run: cd frontend yarn test
+      - run: cd backend && yarn test
+      - run: cd frontend && yarn test
 
 
   deploy:
