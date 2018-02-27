@@ -8,8 +8,6 @@ describe('UserController', () => {
   const post = (url, data, code, cookie = '') => request(sails.hooks.http.app).post(url).send(data).expect(code)
   const get = (url, code, cookie = '') => request(sails.hooks.http.app).get(url).set('Cookie', cookie).expect(code)
 
-  //request(sails.hooks.http.app).get(path).set('Cookie', cookie).expect(code.ok).then(res => { should.exist(res.body) })
-
   const api = {
     register: `/api/user`, // POST
     users: `/api/user`, // GET, admin
@@ -62,8 +60,8 @@ describe('UserController', () => {
 
     it('should fail login', async () => {
       const data = {...user, password: wrongPassword}
-      await post(api.login, data, code.forbidden).then((res) => {
-        res.body.should.be.empty()
+      await post(api.login, data, code.unauthorized).then((res) => {
+        should.exist(res.body.error)
       })
     })
 

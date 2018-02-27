@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from "@angular/router"
 
-import {RegisterComponent} from "./register/register.component";
-import {LoginComponent} from "./login/login.component";
+import { RegisterComponent } from "./register/register.component";
+import { LoginComponent } from "./login/login.component";
+import { MypageComponent } from "./mypage/mypage.component";
 
 const appRoutes: Routes = [
   {
@@ -12,6 +13,10 @@ const appRoutes: Routes = [
   {
     path: "login",
     component: LoginComponent,
+  },
+  {
+    path: "mypage",
+    component: MypageComponent,
   },
 ];
 

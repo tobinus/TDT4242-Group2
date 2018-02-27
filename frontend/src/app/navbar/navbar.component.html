@@ -1,2 +1,24 @@
 
-<h1>{{ title }}</h1>
+<header class="indigo lighten-5">
+  <div class="content-width">
+    <h1>{{ title }}</h1>
+    <div class="welcome-ani-cont">
+      <div *ngIf="messageToggle === 'A'" [@messageChange]="messageToggle"><em>{{ welcomeMessageA }}</em></div>
+      <div *ngIf="messageToggle === 'B'" [@messageChange]="messageToggle"><em>{{ welcomeMessageB }}</em></div>
+    </div>
+  </div>
+  <nav class="indigo">
+    <div class="content-width navbar">
+      <ul class="nav-list">
+        <li class="waves-effect"><a routerLink="/">Super deals!</a></li>
+        <li class="waves-effect"><a routerLink="/products">All products</a></li>
+      </ul>
+      <ul class="nav-list">
+        <li class="waves-effect"><a routerLink="/cart">Shopping cart<span class="badge grey-text">(5)</span></a></li>
+        <li *ngIf="!isLoggedIn" class="waves-effect"><a routerLink="/login">Log in</a></li>
+        <li *ngIf="isLoggedIn" class="waves-effect"><a routerLink="/mypage">My page</a></li>
+        <li *ngIf="isLoggedIn" class="waves-effect"><a (click)="logout()">Log out</a></li>
+      </ul>
+    </div>
+  </nav>
+</header>

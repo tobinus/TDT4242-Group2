@@ -14,10 +14,10 @@ module.exports = {
     // Find user and check password
     User.findOne({email: req.param('email')}).exec(function (err, user) {
       if (err) return res.negotiate(err);
-      if (!user) return res.notFound();
+      if (!user) return res.unauthorized({error:'Wrong e-mail or password'});
       user.checkPassword(req.param('password'), function (err, verified) {
         if (err) return res.negotiate(err);
-        if (!verified) return res.forbidden();
+        if (!verified) return res.unauthorized({error:'Wrong e-mail or password'});
 
         // Store as logged in
         req.session.userId = user.id;
@@ -31,9 +31,9 @@ module.exports = {
    * Log out the currently logged in user
    */
   logout: function (req, res) {
-    req.session.userId = null;
     req.session.authenticated = false;
-    return res.ok('Logged out');
+    req.session.userId = null;
+    return res.ok({message: 'User logged out'});
   },
 
   /**
@@ -45,13 +45,18 @@ module.exports = {
       // Find user
       User.findOne(req.session.userId).exec(function (err, user) {
         if (err) return res.negotiate(err);
-        if (!user) return res.notFound('User not found');
+        if (!user) {
+          // Something wrong so log out
+          req.session.authenticated = false;
+          req.session.userId = null;
+          return res.unauthorized({error: 'Not logged in'});
+        }
 
         // Return details
         return res.json(user);
       });
     } else {
-      return res.notFound('Not logged in');
+      return res.unauthorized({error: 'Not logged in'});
     }
   },
 
@@ -61,8 +66,8 @@ module.exports = {
   makeAdmin: function (req, res) {
     User.update(parseInt(req.params.id), {isAdmin: true}).exec(function (err, user) {
       if (err) return res.negotiate(err);
-      if (!user) return res.notFound('User not found');
-      return res.ok('User updated');
+      if (!user) return res.notFound({error: 'User not found'});
+      return res.ok({message: 'User updated'});
     });
   },
 
@@ -72,8 +77,8 @@ module.exports = {
   removeAdmin: function (req, res) {
     User.update(parseInt(req.params.id), {isAdmin: false}).exec(function (err, user) {
       if (err) return res.negotiate(err);
-      if (!user) return res.notFound('User not found');
-      return res.ok('User updated');
+      if (!user) return res.notFound({error: 'User not found'});
+      return res.ok({message: 'User updated'});
     });
   },
 
