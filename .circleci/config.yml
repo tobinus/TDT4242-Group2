@@ -22,6 +22,7 @@ jobs:
           - v1-dependencies-
 
       - run: cd backend yarn install
+      - run: cd frontend yarn install
 
       - save_cache:
           paths:
@@ -45,6 +46,7 @@ jobs:
           - v1-dependencies-
 
       - run: cd backend yarn test
+      - run: cd frontend yarn test
 
 
   deploy:
