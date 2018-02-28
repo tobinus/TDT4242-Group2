@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { ShoppingCartService } from '../_shared/services/shopping-cart.service';
 import { ShoppingCartItem } from '../_shared/app.models';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -11,13 +12,17 @@ import { ShoppingCartItem } from '../_shared/app.models';
 export class ShoppingCartComponent implements OnInit {
 
   items : Array<ShoppingCartItem> = [];
-
+  private shoppingCartSub : Subscription;
   constructor(private shoppingCart : ShoppingCartService) { }
 
   ngOnInit() {
-    this.shoppingCart.getShoppingCart().subscribe((items : Array<ShoppingCartItem>) => {
+    this.shoppingCartSub = this.shoppingCart.getShoppingCart().subscribe((items : Array<ShoppingCartItem>) => {
       this.items = items;
     })
+  }
+
+  ngOnDestroy(){
+    this.shoppingCartSub.unsubscribe();
   }
 
 }
