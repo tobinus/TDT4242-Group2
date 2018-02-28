@@ -60,7 +60,7 @@ export class ShoppingCartService {
   public updateItem(newItem : ShoppingCartItem){
     let item = this.findItem(newItem.productId);
     if(item){
-      item.quantity = newItem.quantity;
+      item.quantity = Math.max(newItem.quantity,1);
     }
     this.updateAndNotify();
   }
