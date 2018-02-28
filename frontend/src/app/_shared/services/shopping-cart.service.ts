@@ -15,11 +15,6 @@ export class ShoppingCartService {
 
   private cartSub : BehaviorSubject<ShoppingCartItem[]>;
   
-  //let cart = (localStorage.getItem("shopping-cart")) ? JSON.parse(localStorage.getItem("shopping-cart")) : ([])
-  //localStorage.setItem("shopping-cart", JSON.stringify(cart));
-  //Materialize.toast('Item added to shopping cart', 4000)
-
-
   constructor(private prodService: ProductsService) {
     try{
       this.cart = (localStorage.getItem("shopping-cart") ? JSON.parse(localStorage.getItem("shopping-cart")) : []).map((data) => {
@@ -71,7 +66,7 @@ export class ShoppingCartService {
   }
 
   public getShoppingCart() : Observable<Array<ShoppingCartItem>>{
-    return this.cartSub;
+    return this.cartSub.asObservable();
   }
 
   private updateAndNotify(){
