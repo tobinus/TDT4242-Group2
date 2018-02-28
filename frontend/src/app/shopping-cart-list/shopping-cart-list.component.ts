@@ -15,10 +15,10 @@ export class ShoppingCartListComponent implements OnChanges {
   private cartList : Array<ShoppingCartItem> = [];
   private products : Map<number, ProductModel> = new Map<number, ProductModel>();
   
-  @Output("onItemChange")
+  @Output("itemChange")
   private itemQtyEmitter = new EventEmitter<ShoppingCartItem>();
 
-  @Output("onItemDelete")
+  @Output("itemDelete")
   private itemDelEmitter = new EventEmitter<ShoppingCartItem>(); 
 
 

@@ -25,4 +25,12 @@ export class ShoppingCartComponent implements OnInit {
     this.shoppingCartSub.unsubscribe();
   }
 
+  private deleteItem(item : ShoppingCartItem){
+    this.shoppingCart.removeItem(item.productId);
+  }
+
+  private changeItem(item : ShoppingCartItem){
+    this.shoppingCart.updateItem(item);
+  }
+
 }
