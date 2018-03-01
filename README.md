@@ -85,7 +85,7 @@ GET /api/user
 ```
 Get the list of all users. Requires admin privileges.
 ```
-GET /api/user/:id?populate=purchase_history
+GET /api/user/:id?populate=order_history
 ```
 Get user details with purchase history for user with :id.
 ```
@@ -117,11 +117,12 @@ Remove admin privileges from user with :id. Requires admin privileges.
 ```
 GET /api/product
 ```
-Get list of all products. *URL params apply*
+Get list of all products. [*URL params apply*](https://sailsjs.com/documentation/reference/blueprint-api/find-where).
 ```
 POST /api/product
 ```
-Create a new product. Requires admin privileges.
+Create a new product. See [model attributes](backend/api/models/Product.js) for required fields.  
+Requires admin privileges.
 ```
 GET /api/product/:id
 ```
@@ -134,3 +135,5 @@ Update product with :id. Requires admin privileges.
 DELETE /api/product/:id
 ```
 Delete product with :id. Requires admin privileges.
+
+### Order
