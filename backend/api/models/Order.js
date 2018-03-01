@@ -14,10 +14,10 @@ module.exports = {
       model: 'user',
     },
 
-    // Association to the products in this order
-    products: {
-      collection: 'product',
-    },
+    // Association to the products in this order (drop? details are in order_details)
+    // products: {
+    //   collection: 'product',
+    // },
 
     // Total calculated price for this order
     total_price: {

@@ -43,6 +43,8 @@ module.exports = {
     },
 
     // Price modifier for a percent sale (e.g. 0.7 is 30% sale)
+    // percent = (1 - price_mod) * 100
+    // price_mod = 1 - percent / 100
     price_mod: {
       type: 'float',
       min: 0,
@@ -80,7 +82,7 @@ module.exports = {
       type: 'binary',
     },
 
-    // The quantity in stock fro this product
+    // The quantity in stock for this product
     stock_count: {
       type: 'integer',
       defaultsTo: 0,

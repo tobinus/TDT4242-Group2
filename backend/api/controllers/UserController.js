@@ -45,18 +45,13 @@ module.exports = {
       // Find user
       User.findOne(req.session.userId).exec(function (err, user) {
         if (err) return res.negotiate(err);
-        if (!user) {
-          // User not found so log out
-          req.session.authenticated = false;
-          req.session.userId = null;
-          return res.unauthorized({error: 'Not logged in'});
-        }
+        if (!user) return res.unauthorized();
 
         // Return details
         return res.json(user);
       });
     } else {
-      return res.unauthorized({error: 'Not logged in'});
+      return res.unauthorized();
     }
   },
 
@@ -67,7 +62,7 @@ module.exports = {
     User.update(parseInt(req.params.id), {isAdmin: true}).exec(function (err, user) {
       if (err) return res.negotiate(err);
       if (!user) return res.notFound({error: 'User not found'});
-      return res.ok({message: 'User updated'});
+      return res.json(user);
     });
   },
 
@@ -78,7 +73,7 @@ module.exports = {
     User.update(parseInt(req.params.id), {isAdmin: false}).exec(function (err, user) {
       if (err) return res.negotiate(err);
       if (!user) return res.notFound({error: 'User not found'});
-      return res.ok({message: 'User updated'});
+      return res.json(user);
     });
   },
 

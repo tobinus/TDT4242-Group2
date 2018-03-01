@@ -59,7 +59,7 @@ Create a user through the frontend or the API. Then run Sails in CLI mode with `
 ```
 User.update({email: 'youremail@mail.com'}, {isAdmin: true}).exec((err, user) => {console.log(err ? err : user)})
 ```
-Replacing **youremail@mail.com** with the email you just used to register a user.
+Replacing `youremail@mail.com` with the email you just used to register a user.
 
 ### Frontend
 Make sure you have angular installed. Follow the guide at https://angular.io/guide/quickstart
@@ -137,3 +137,41 @@ DELETE /api/product/:id
 Delete product with :id. Requires admin privileges.
 
 ### Order
+```
+GET /api/order?populate=user
+```
+Get list of all orders with user details. Requires admin privileges.
+```
+POST /api/order
+```
+Place a new order. Should be an array of objects with `productId` and `quantity`. Orders must be confirmed after placing.  
+Returns a json response with order details like in the example below:
+
+<details><summary>Click to expand example</summary><pre>
+{
+    "products": [
+        {
+            "product": {...},
+            "quantity": 2,
+            "sum": 40.6
+        },
+        {
+            "product": {...},
+            "quantity": 1,
+            "sum": 19
+        }
+    ],
+    "totalPrice": 59.6,
+    "orderNumber": "TODO should be order ID",
+    "orderDate": "ISO date string"
+}
+</pre></details><br>
+
+```
+POST /api/order/:id/confirm
+```
+Confirm a placed order with :id.
+```
+POST /api/order/:id/dismiss
+```
+Dismiss a placed order with :id

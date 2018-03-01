@@ -51,6 +51,8 @@ module.exports.routes = {
   'GET /api/user/current': 'UserController.current',
   'POST /api/user/:id/makeadmin': 'UserController.makeAdmin',
   'POST /api/user/:id/removeadmin': 'UserController.removeAdmin',
+  'POST /api/order/:id/confirm': 'OrderController.confirm',
+  'POST /api/order/:id/dismiss': 'OrderController.dismiss',
 
   // Catch all but static assets for angular frontend
   'GET r|^\/(?!api).+|': {
