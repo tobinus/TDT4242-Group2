@@ -6,8 +6,18 @@ import { ProductModel } from "../app.models";
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/map';
+
+
+class ProductCacheItem{
+  public lastUpdate : Date = new Date();
+  public life : number = 30;
+  constructor(public product : ProductModel){}
+}
+
 @Injectable()
 export class ProductsService {
+
+  private productCache : Map<number, {}> = new Map<number, {}>();
 
   constructor(
     private http: HttpClient,
@@ -40,6 +50,11 @@ export class ProductsService {
     return this.http.get<ProductModel[]>(url)
     
   }
+
+  private updateProductCache(product : ProductModel){
+    let now = new Date();
+  }
+
   
   // ----------- posters -----------
   
