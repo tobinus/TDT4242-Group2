@@ -10,7 +10,7 @@ Shop til you drop devops and webapp project for TDT4242 2018.
 Here follows some useful info for those who should review our code.
 
 The code from sprint 1 will remain in the [*master* branch](https://github.com/DeimosA/TDT4242-Group2/tree/master).
-Note that *dev* is the default branch in our repo so click link above as needed.
+Note that *dev* is the default branch in our repo so click previous link as needed.
 
 <!--(link to site)-->
 
@@ -57,9 +57,9 @@ sails lift
 ###### Bootstrapping an admin user
 Create a user through the frontend or the API. Then run Sails in CLI mode with `sails console` and update the user you just created like this:
 ```
-User.update({email: youremail@mail.com}, {isAdmin: true}).exec()
+User.update({email: 'youremail@mail.com'}, {isAdmin: true}).exec((err, user) => {console.log(err ? err : user)})
 ```
-Replacing the email address with the one you just used to create a user.
+Replacing **youremail@mail.com** with the email you just used to register a user.
 
 ### Frontend
 Make sure you have angular installed. Follow the guide at https://angular.io/guide/quickstart
