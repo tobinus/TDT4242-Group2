@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy} from '@angular/core';
 import { UserAuthService } from '../_shared/services/user-auth.service';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
+import { UserModel } from '../_shared/app.models';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +12,7 @@ import { Subscription } from 'rxjs/Subscription';
 })
 export class LoginComponent implements OnInit, OnDestroy {
 
-  private isLoggedIn: boolean = false;
+  private user: UserModel = null;
   private userAuthEventsSub: Subscription;
   private userCredentials = {
     email: "",
@@ -26,10 +27,10 @@ export class LoginComponent implements OnInit, OnDestroy {
   ngOnInit() {
     // Subscribe to login and logout user auth events
     this.userAuthEventsSub = this.userAuthService.getUserAuthEvents().subscribe(
-      next => {
-        if (next.hasOwnProperty('isLoggedIn')) {
-          this.isLoggedIn = next['isLoggedIn'];
-          if (this.isLoggedIn) this.router.navigate(['/mypage']);
+      user => {
+        this.user = user;
+        if(user != null){
+          this.router.navigate(['/mypage']);
         }
       }
     );
@@ -55,7 +56,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         this.handleLoginResult(err.status);
       } else {
         // UserModel mismatch or unknown error
-        console.log(err);
+        console.error(err);
       }
     });
   }
