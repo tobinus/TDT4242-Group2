@@ -11,6 +11,7 @@ import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { MypageComponent } from './mypage/mypage.component';
 import { MaterializeModule } from 'angular2-materialize';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 import { UserAuthService } from "./_shared/services/user-auth.service";
 import { ProductsService } from "./_shared/services/products.service";
@@ -23,6 +24,8 @@ import { ProductContainerComponent } from './product-container/product-container
 import { ProductFilterComponent } from './product-filter/product-filter.component';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { ShoppingCartListComponent } from './shopping-cart-list/shopping-cart-list.component';
+
+import { ShoppingCartService } from './_shared/services/shopping-cart.service';
 
 /**
  * Initialize app and check if a user is logged in
@@ -59,10 +62,12 @@ function init_app(userAuthService: UserAuthService) {
     HttpClientModule,
     MaterializeModule,
     BrowserAnimationsModule,
+    InfiniteScrollModule,
   ],
   providers: [
     UserAuthService,
     ProductsService,
+    ShoppingCartService,
     {
       provide: APP_INITIALIZER,
       useFactory: init_app,
