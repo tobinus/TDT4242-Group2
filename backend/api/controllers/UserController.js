@@ -61,7 +61,7 @@ module.exports = {
   makeAdmin: function (req, res) {
     User.update(parseInt(req.params.id), {isAdmin: true}).exec(function (err, user) {
       if (err) return res.negotiate(err);
-      if (!user) return res.notFound({error: 'User not found'});
+      if (!user || user.length < 1) return res.notFound({error: 'User not found'});
       return res.json(user);
     });
   },
@@ -72,7 +72,7 @@ module.exports = {
   removeAdmin: function (req, res) {
     User.update(parseInt(req.params.id), {isAdmin: false}).exec(function (err, user) {
       if (err) return res.negotiate(err);
-      if (!user) return res.notFound({error: 'User not found'});
+      if (!user || user.length < 1) return res.notFound({error: 'User not found'});
       return res.json(user);
     });
   },

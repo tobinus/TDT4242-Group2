@@ -82,7 +82,8 @@ module.exports = {
         orderDetails.orderNumber = null;
 
         // Create a new order
-        Order.create({user: user.id, total_price: priceAccumulator, order_details: orderDetails}).exec(function (err, order) {
+        Order.create({user: user.id, total_price: priceAccumulator, order_details: orderDetails}).exec(
+          function (err, order) {
           if (err) return res.negotiate(err);
           if (!order) return res.serverError();
 
@@ -102,16 +103,40 @@ module.exports = {
    * Confirm a placed order
    */
   confirm: function (req, res) {
-    // TODO check logged in user vs order user
+    Order.findOne(req.params.id).exec(function (err, order) {
+      if (err) return res.negotiate(err);
+      if (!order) return res.notFound({error: 'Order not found'});
+      if (order.user !== req.session.userId)
+        return res.forbidden({error: 'You are not permitted to perform this action'});
 
+      Order.update(order.id, {user_confirmed: true}).exec(function (err, order) {
+        if (err) return res.negotiate(err);
+        if (!order || order.length < 1) return res.notFound({error: 'Order not found'});
+
+        return res.json(order);
+      });
+    });
   },
 
   /**
    * Dismiss a placed order
    */
   dismiss: function (req, res) {
-    // TODO check logged in user vs order user
+    Order.findOne(req.params.id).exec(function (err, order) {
+      if (err) return res.negotiate(err);
+      if (!order) return res.notFound({error: 'Order not found'});
+      if (order.user !== req.session.userId)
+        return res.forbidden({error: 'You are not permitted to perform this action'});
+      if (order.user_confirmed && order.status !== 'PENDING')
+        return res.badRequest({error: 'Can not dismiss an accepted order'});
 
+      Order.destroy(order.id).exec(function (err, deletedOrder) {
+        if (err) return res.negotiate(err);
+        if (!deletedOrder || deletedOrder.length < 1) return res.notFound({error: 'Order not found'});
+
+        return res.json(deletedOrder);
+      });
+    });
   }
 
 };

@@ -54,7 +54,7 @@ To locally run the backend on your computer, CD to the backend folder, and serve
 ```
 sails lift
 ```
-###### Bootstrapping an admin user
+#### Bootstrapping an admin user
 Create a user through the frontend or the API. Then run Sails in CLI mode with `sails console` and update the user you just created like this:
 ```
 User.update({email: 'youremail@mail.com'}, {isAdmin: true}).exec((err, user) => {console.log(err ? err : user)})
@@ -87,7 +87,7 @@ Get the list of all users. Requires admin privileges.
 ```
 GET /api/user/:id?populate=order_history
 ```
-Get user details with purchase history for user with :id.
+Get user details with order history for user with :id.
 ```
 DELETE /api/user/:id
 ```
@@ -138,9 +138,9 @@ Delete product with :id. Requires admin privileges.
 
 ### Order
 ```
-GET /api/order?populate=user
+GET /api/order?populate=user&user_confirmed=true
 ```
-Get list of all orders with user details. Requires admin privileges.
+Get list of all user confirmed orders with user details. Requires admin privileges.
 ```
 POST /api/order
 ```
@@ -174,4 +174,4 @@ Confirm a placed order with :id.
 ```
 POST /api/order/:id/dismiss
 ```
-Dismiss a placed order with :id
+Dismiss a placed order with :id. Must be **not confirmed** or **confirmed with status PENDING**.
