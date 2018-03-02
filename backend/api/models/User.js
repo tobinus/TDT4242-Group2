@@ -11,30 +11,35 @@ module.exports = {
 
   attributes: {
 
+    // Users email address
     email: {
       type: 'string',
       required: true,
       unique: true,
-      email: true
+      email: true,
     },
 
+    // Password hash
     password: {
       type: 'string',
       required: true,
       minLength: 8,
-      maxLength: 72
+      maxLength: 72,
     },
 
+    // Whether the user has admin privileges
     isAdmin: {
       type: 'boolean',
-      defaultsTo: false
+      defaultsTo: false,
     },
 
-    purchase_history: {
-      collection: 'purchase',
+    // Users order history
+    order_history: {
+      collection: 'order',
       via: 'user',
     },
 
+    // Controls the details sent through the API
     toJSON: function() {
       let obj = this.toObject();
       // Do not expose password hash to the world
@@ -42,6 +47,7 @@ module.exports = {
       return obj;
     },
 
+    // Check if a password matches the hash
     checkPassword: function (password, cb) {
       bcrypt.compare(password, this.password, cb);
     },

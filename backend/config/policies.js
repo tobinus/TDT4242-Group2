@@ -73,4 +73,13 @@ module.exports.policies = {
     populate: false,
   },
 
+  OrderController: {
+    '*': false,
+    create: 'sessionAuth',
+    find: 'isAdmin',
+    findOne: 'isAdmin',
+    confirm: 'sessionAuth',
+    dismiss: 'sessionAuth',
+  }
+
 };
