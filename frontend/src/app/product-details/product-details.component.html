@@ -1,3 +1,21 @@
-<p>
-  product-details works!
-</p>
+
+<div *ngIf="product">
+  <h2>{{product.name}}</h2>
+  <p><em>{{product.manufacturer}}</em></p>
+  <p>{{product.description}}</p>
+  <div>
+    <p *ngIf="product.on_sale === 'PRICE_MOD'" class="red-text">
+      {{ ((1 - product.price_mod) * 100).toFixed(0) }}% off!</p>
+    <p *ngIf="product.on_sale === 'PACKAGE'" class="red-text">
+      {{product.package_get_count}} for {{product.package_pay_count}} package deal!</p>
+  </div>
+  <div>
+    <h3> kr {{product.price.toFixed(2)}} </h3>
+    <button type="button" class="waves-effect waves-light btn" (click)="addToCart(product.id)">Add to cart</button>
+  </div>
+
+  <div *ngIf="user && user.isAdmin">
+    <br><br><br>
+    <a [routerLink]="['/product', product.id, 'edit']" class="btn">Edit this product</a>
+  </div>
+</div>

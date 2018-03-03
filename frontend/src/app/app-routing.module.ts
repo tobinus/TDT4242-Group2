@@ -21,15 +21,15 @@ const appRoutes: Routes = [
     component: ProductContainerComponent,
   },
   {
-    path: 'products/:productId',
-    component: ProductDetailsComponent,
-  },
-  {
-    path: "products/new",
+    path: 'product/new',
     component: ProductCreationComponent,
   },
   {
-    path: "products/:productId/edit",
+    path: 'product/:productId',
+    component: ProductDetailsComponent,
+  },
+  {
+    path: 'product/:productId/edit',
     component: ProductCreationComponent,
   },
   {
@@ -37,21 +37,21 @@ const appRoutes: Routes = [
     component: ShoppingCartComponent,
   },
   {
-    path: "register",
+    path: 'register',
     component: RegisterComponent,
   },
   {
-    path: "login",
+    path: 'login',
     component: LoginComponent,
   },
   {
-    path: "mypage",
+    path: 'mypage',
     component: MypageComponent,
   },
 
   // Keep last
   {
-    path: "**",
+    path: '**',
     component: NotFoundComponent,
   }
 ];

@@ -30,9 +30,6 @@ export class NavbarComponent implements OnInit, OnDestroy {
   private userAuthEventsSub: Subscription;
   private messageToggle: string = 'A';
   private messageIndex: number = 0;
-
-  private itemsInCart = 0;
-
   private welcomeMessageList: string[] = [
     "Welcome to our wonderful e-commerce site",
     "Shop til you drop ... seriously",
@@ -47,8 +44,10 @@ export class NavbarComponent implements OnInit, OnDestroy {
   private welcomeMessageA: string = this.welcomeMessageList[this.messageIndex];
   private welcomeMessageB: string = '';
 
+  private itemsInCart = 0;
   private intervalId : number;
   private shoppingCartSub : Subscription;
+
   constructor(
     private userAuthService: UserAuthService,
     private shoppingCart : ShoppingCartService,
