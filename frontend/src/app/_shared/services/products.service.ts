@@ -13,41 +13,73 @@ export class ProductsService {
     private http: HttpClient,
   ) { }
 
-  
-  
+
+
   // ----------- getters -----------
-  
-  /* getting 1 product based on ID */
+
+  /**
+   *  getting 1 product based on ID
+   */
   getProduct(id: number): Observable<ProductModel> {
     return this.http.get<ProductModel>('/api/product/' + id);
   }
-  
-  /* getting all product objects, with no skip or limit */
+
+  /**
+   * getting all product objects, with no skip or limit
+   * @deprecated Use searchProducts
+   */
   getAllProducts(): Observable<ProductModel[]> {
     return this.getProducts('/api/product');
   }
-  
-  // limit, skip, searchTerm, sort(ASC/DESC), other attributes
-  /* Getting producs based on limit, skip, searchterm, and price sort  */
-  searchProducts(limit, skip, searchTerm, sort): Observable<ProductModel[]>{
-    let url = '/api/product?where={"name": {"contains": "' + searchTerm + '"}}' + '&skip=' + skip + '&limit=' + limit + '&sort=' + sort;
+
+  /**
+   * Get products based on filters
+   * All parameters are optional
+   *
+   * @param {number} [limit=20]
+   * @param {number} [skip=0]
+   * @param {string} [searchTerm='']
+   * @param {string} [sort='']        - Add ' ASC'/' DESC'
+   * @returns {Observable<ProductModel[]>}
+   */
+  searchProducts(limit = 20, skip = 0, searchTerm = '', sort = ''): Observable<ProductModel[]>{
+    let where = {
+      or: [
+        { name: {contains: searchTerm} },
+        { description: {contains: searchTerm} },
+      ],
+      listed: true, // We only want products that are still buyable
+    };
+    // let url = '/api/product?where={"name": {"contains": "' + searchTerm + '"}}' +
+    //   '&skip=' + skip + '&limit=' + limit + '&sort=' + sort;
+    let url = `/api/product?where=${JSON.stringify(where)}&skip=${skip}&limit=${limit}&sort=${sort}`;
     return this.getProducts(url);
   }
-  
-  
-  /* private method to reduce redundansy on getters */
+
+  /**
+   * Get all products that are on sale
+   */
+  getSaleProducts(): Observable<ProductModel[]> {
+    let url = '/api/product?listed=true&where={"on_sale":{"!":"NO_SALE"}}';
+    return this.getProducts(url);
+  }
+
+  /**
+   * private method to reduce redundancy on getters
+   */
   private getProducts(url: string): Observable<ProductModel[]>{
     return this.http.get<ProductModel[]>(url)
-    
   }
-  
+
   // ----------- posters -----------
-  
-  /* post a new product to the backend */
+
+  /**
+   *  post a new product to the backend
+   */
   postProduct(product): Observable<Object> {
     let url = '/api/product';
     return this.http.post(url, product);
-    
+
   }
 
 }

@@ -34,6 +34,7 @@ module.exports = {
       if (!user) return res.unauthorized();
 
       // Fetch product details from DB
+      // TODO don't allow buying unlisted products
       Product.find({id: Object.keys(orderQuantity)}).exec(function (err, products) {
         if (err) return res.negotiate(err);
         if (!products) return res.badRequest({error: 'None of the products you ordered exist (we think)'});
