@@ -15,7 +15,8 @@
       </ul>
       <ul class="nav-list">
         <li class="waves-effect"><a routerLink="/cart"> Shopping cart
-          <span *ngIf="itemsInCart > 0" data-badge-caption="items" class="red new badge">{{itemsInCart}}</span></a></li>
+          <span *ngIf="itemsInCart > 0" data-badge-caption="items" class="deep-orange darken-3 new badge">{{itemsInCart}}</span>
+        </a></li>
         <li *ngIf="!user" class="waves-effect"><a routerLink="/login">Log in</a></li>
         <li *ngIf="user" class="waves-effect"><a routerLink="/mypage">My page</a></li>
         <li *ngIf="user" class="waves-effect"><a (click)="logout()">Log out</a></li>

@@ -1,6 +1,8 @@
 import { Observable } from "rxjs/Observable";
 
-
+/**
+ * User details
+ */
 class UserModel{
 
   id: number;
@@ -16,9 +18,11 @@ class UserModel{
       throw new Error('Not a valid user object');
     }
   }
-
 }
 
+/**
+ * Product details
+ */
 interface ProductModel{
   id: number;
   name: string;
@@ -33,14 +37,19 @@ interface ProductModel{
   stock_resupply_date: Date;
 }
 
+/**
+ * An item in the shopping cart
+ */
 class ShoppingCartItem{
+
   private _prodId: number;
   private _qty: number;
   private _productResolver: Function;
+
   constructor(productResolver: Function, productId: number, qty :number = 1){
     this._prodId = productId;
     this._qty = qty;
-    this._productResolver = productResolver; 
+    this._productResolver = productResolver;
   }
 
   public get productId() : number{
@@ -59,5 +68,6 @@ class ShoppingCartItem{
     this._qty = qty;
   }
 }
+
 
 export {UserModel, ProductModel, ShoppingCartItem}

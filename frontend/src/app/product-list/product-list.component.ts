@@ -1,5 +1,4 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import Materialize from "materialize-css";
 
 import { ShoppingCartService } from '../_shared/services/shopping-cart.service';
 
@@ -14,18 +13,17 @@ export class ProductListComponent implements OnInit {
   productList = [];
   @Input()
   loading: boolean;
-  
+
+  @Output()
+  nextPageCb = new EventEmitter();
+
   constructor(private shoppingCart : ShoppingCartService) { }
 
   ngOnInit() {
   }
 
-  @Output()
-  nextPageCb = new EventEmitter();
-  
   addToCart(id){
-    this.shoppingCart.addItem(id);
     // adding item ID to cart
-
+    this.shoppingCart.addItem(id);
   }
 }
