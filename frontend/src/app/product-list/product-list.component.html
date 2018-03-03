@@ -1,18 +1,25 @@
 <div class="row">
-  <ul class="collection with-header"
+  <ul class="collection"
     infinite-scroll
     [infiniteScrollDistance]="2"
     [infiniteScrollThrottle]="10"
     (scrolled)= "nextPageCb.emit()"
     >
-    <li class="collection-header"><h4>Products</h4></li>
-    <li class="collection-item" *ngFor="let product of productList">
-      <p>{{product.name}} - {{product.price}}kr</p>
+    <li *ngFor="let product of productList" class="collection-item product-list-item">
       <div>
+        <h3>{{product.name}}</h3>
         <p><em>{{product.manufacturer}}</em></p>
-        <p>{{product.description}}</p>
       </div>
-      <a class="waves-effect waves-light btn" (click)="addToCart(product.id)">Buy now</a>
+      <div class="price-box valign-wrapper">
+        <h3 *ngIf="product.on_sale === 'PRICE_MOD'" class="deal-display red-text vertical-align">
+          {{ ((1 - product.price_mod) * 100).toFixed(0) }}% off!</h3>
+        <h3 *ngIf="product.on_sale === 'PACKAGE'" class="deal-display red-text">
+          {{product.package_get_count}} for {{product.package_pay_count}} package deal!</h3>
+        <div>
+          <h3 class="center-align"> kr {{product.price.toFixed(2)}} </h3>
+          <button class="waves-effect waves-light btn" (click)="addToCart(product.id)">Add to cart</button>
+        </div>
+      </div>
     </li>
   </ul>
 </div>

@@ -20,6 +20,10 @@ h2 {
   font-size: 20pt !important;
 }
 
+h3 {
+  font-size: 16pt !important;
+}
+
 .content-width {
   max-width: 1000px;
   margin: auto;
