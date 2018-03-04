@@ -20,7 +20,7 @@ export class ProductsService {
   /**
    *  getting 1 product based on ID
    */
-  getProduct(id: number): Observable<ProductModel> {
+  getProduct(id: number | string): Observable<ProductModel> {
     return this.http.get<ProductModel>('/api/product/' + id);
   }
 

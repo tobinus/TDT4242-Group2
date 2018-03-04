@@ -5,21 +5,23 @@
     [infiniteScrollThrottle]="10"
     (scrolled)= "nextPageCb.emit()"
     >
-    <li *ngFor="let product of productList" class="collection-item product-list-item">
-      <div>
-        <h3>{{product.name}}</h3>
-        <p><em>{{product.manufacturer}}</em></p>
-      </div>
-      <div class="price-box valign-wrapper">
-        <h3 *ngIf="product.on_sale === 'PRICE_MOD'" class="deal-display red-text vertical-align">
-          {{ ((1 - product.price_mod) * 100).toFixed(0) }}% off!</h3>
-        <h3 *ngIf="product.on_sale === 'PACKAGE'" class="deal-display red-text">
-          {{product.package_get_count}} for {{product.package_pay_count}} package deal!</h3>
+    <li *ngFor="let product of productList" class="collection-item">
+      <a [routerLink]="['/product', product.id]" class="product-list-item black-text">
         <div>
-          <h3 class="center-align"> kr {{product.price.toFixed(2)}} </h3>
-          <button type="button" class="waves-effect waves-light btn" (click)="addToCart(product.id)">Add to cart</button>
+          <h3>{{product.name}}</h3>
+          <p><em>{{product.manufacturer}}</em></p>
         </div>
-      </div>
+        <div class="price-box valign-wrapper">
+          <h3 *ngIf="product.on_sale === 'PRICE_MOD'" class="deal-display red-text vertical-align">
+            {{ ((1 - product.price_mod) * 100).toFixed(0) }}% off!</h3>
+          <h3 *ngIf="product.on_sale === 'PACKAGE'" class="deal-display red-text">
+            {{product.package_get_count}} for {{product.package_pay_count}} package deal!</h3>
+          <div>
+            <h3 class="center-align"> kr {{product.price.toFixed(2)}} </h3>
+            <button type="button" class="waves-effect waves-light btn" (click)="addToCart($event, product.id)">Add to cart</button>
+          </div>
+        </div>
+      </a>
     </li>
   </ul>
 </div>

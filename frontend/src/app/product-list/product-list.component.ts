@@ -22,8 +22,10 @@ export class ProductListComponent implements OnInit {
   ngOnInit() {
   }
 
-  addToCart(id){
+  addToCart(event, id){
     // adding item ID to cart
     this.shoppingCart.addItem(id);
+    event.preventDefault();
+    event.stopPropagation();
   }
 }
