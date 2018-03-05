@@ -1,3 +1,9 @@
-<app-product-filter (search_form)="updateSearch($event)"></app-product-filter>
 
-<app-product-list [productList]="products" [loading]="loading" (nextPageCb)="getNextProducts($event)" on></app-product-list>
+<div class="flex-container">
+  <div class="filter-container">
+    <app-product-filter (search_form)="updateSearch($event)"></app-product-filter>
+  </div>
+  <div class="list-container">
+    <app-product-list [productList]="products" [loading]="loading" (nextPageCb)="getNextProducts($event)" on></app-product-list>
+  </div>
+</div>

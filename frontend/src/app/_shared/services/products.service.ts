@@ -40,6 +40,7 @@ export class ProductsService {
    * @param {number} [skip=0]
    * @param {string} [searchTerm='']
    * @param {string} [sort='']        - Add ' ASC'/' DESC'
+   * @param {number} [minPrice=0]
    * @returns {Observable<ProductModel[]>}
    */
   searchProducts(limit = 20, skip = 0, searchTerm = '', sort = '', minPrice = 0): Observable<ProductModel[]>{
