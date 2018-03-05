@@ -77,7 +77,7 @@ export class UserAuthService {
    * Return an observable that can be subscribed to and listen for login or logout events
    * @returns {Observable<Object>}
    */
-  getUserAuthEvents(): Observable<UserModel> {
+  getUserAuthEvents(): Observable<object> {
     return this.userAuthEvents.asObservable();
   }
 
@@ -96,4 +96,5 @@ export class UserAuthService {
   private userLoggedOut(): void {
     this.userAuthEvents.next(null);
   }
+
 }
