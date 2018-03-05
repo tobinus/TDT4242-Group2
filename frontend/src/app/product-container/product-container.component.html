@@ -1,7 +1,3 @@
-<p>
-  product-container works!
-</p>
-
-<app-product-filter></app-product-filter>
+<app-product-filter (search_form)="updateSearch($event)"></app-product-filter>
 
 <app-product-list [productList]="products" [loading]="loading" (nextPageCb)="getNextProducts($event)" on></app-product-list>

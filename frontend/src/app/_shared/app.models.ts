@@ -69,5 +69,10 @@ class ShoppingCartItem{
   }
 }
 
+interface SearchForm {
+  curr_search: string,
+  curr_price: number,
+  curr_sort: string,
+}
 
-export {UserModel, ProductModel, ShoppingCartItem}
+export {UserModel, ProductModel, ShoppingCartItem, SearchForm}

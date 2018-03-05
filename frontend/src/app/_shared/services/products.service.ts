@@ -42,13 +42,14 @@ export class ProductsService {
    * @param {string} [sort='']        - Add ' ASC'/' DESC'
    * @returns {Observable<ProductModel[]>}
    */
-  searchProducts(limit = 20, skip = 0, searchTerm = '', sort = ''): Observable<ProductModel[]>{
+  searchProducts(limit = 20, skip = 0, searchTerm = '', sort = '', minPrice = 0): Observable<ProductModel[]>{
     let where = {
       or: [
         { name: {contains: searchTerm} },
         { description: {contains: searchTerm} },
       ],
       listed: true, // We only want products that are still buyable
+      price: {">": minPrice},
     };
     // let url = '/api/product?where={"name": {"contains": "' + searchTerm + '"}}' +
     //   '&skip=' + skip + '&limit=' + limit + '&sort=' + sort;
