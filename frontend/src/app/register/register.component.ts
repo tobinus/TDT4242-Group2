@@ -3,6 +3,8 @@ import { UserAuthService } from '../_shared/services/user-auth.service';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 
+import { UserModel } from '../_shared/app.models';
+
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -11,7 +13,7 @@ import { Subscription } from 'rxjs/Subscription';
 })
 export class RegisterComponent implements OnInit, OnDestroy {
 
-  private isLoggedIn: boolean = false;
+  private user: UserModel = null;
   private userAuthEventsSub: Subscription;
   private userCredentials = {
     email: "",
@@ -26,11 +28,8 @@ export class RegisterComponent implements OnInit, OnDestroy {
   ngOnInit() {
     // Subscribe to login and logout user auth events
     this.userAuthEventsSub = this.userAuthService.getUserAuthEvents().subscribe(
-      next => {
-        if (next.hasOwnProperty('isLoggedIn')) {
-          this.isLoggedIn = next['isLoggedIn'];
-          if (this.isLoggedIn) this.router.navigate(['/mypage']);
-        }
+      user => {
+        this.user = user;
       }
     );
   }

@@ -26,7 +26,7 @@ import { ShoppingCartService } from "../_shared/services/shopping-cart.service";
 export class NavbarComponent implements OnInit, OnDestroy {
 
   private title: string = 'SPESIALBUA';
-  private isLoggedIn: boolean = false;
+  private user: UserModel = null;
   private userAuthEventsSub: Subscription;
   private messageToggle: string = 'A';
   private messageIndex: number = 0;
@@ -55,8 +55,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     // Subscribe to login and logout user auth events and update whether a user is logged in or not
-    this.userAuthEventsSub = this.userAuthService.getUserAuthEvents().subscribe(next => {
-      if (next.hasOwnProperty('isLoggedIn')) this.isLoggedIn = next['isLoggedIn'];
+    this.userAuthEventsSub = this.userAuthService.getUserAuthEvents().subscribe(user => {
+      this.user = user;
     });
 
     this.shoppingCartSub = this.shoppingCart.getShoppingCart().subscribe((cart) => {
