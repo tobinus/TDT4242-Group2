@@ -1,0 +1,19 @@
+
+.radio-container {
+  margin-top: 5px;
+}
+
+.radio-container .row {
+  margin-bottom: 15px;
+}
+
+.inline {
+  margin: 0;
+}
+
+.inline input {
+  margin: 0;
+  height: 24px;
+  width: 50px;
+  text-align: center;
+}

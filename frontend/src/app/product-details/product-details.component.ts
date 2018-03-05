@@ -21,14 +21,14 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
   private userAuthEventsSub: Subscription;
 
   constructor(
-    private route: ActivatedRoute,
+    private activatedRoute: ActivatedRoute,
     private productsService: ProductsService,
     private shoppingCart : ShoppingCartService,
     private userAuthService: UserAuthService,
   ) { }
 
   ngOnInit() {
-    let productObs: Observable<ProductModel> = this.route.paramMap.switchMap(
+    let productObs: Observable<ProductModel> = this.activatedRoute.paramMap.switchMap(
       (params: ParamMap) => this.productsService.getProduct(params.get('productId')));
     productObs.subscribe(product => this.product = product);
 

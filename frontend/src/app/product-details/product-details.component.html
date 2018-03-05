@@ -10,12 +10,15 @@
       {{product.package_get_count}} for {{product.package_pay_count}} package deal!</p>
   </div>
   <div>
-    <h3> kr {{product.price.toFixed(2)}} </h3>
+    <h3 *ngIf="product.on_sale === 'PRICE_MOD'">
+      kr {{(product.price * product.price_mod).toFixed(2)}} <em class="old-price">{{product.price.toFixed(2)}}</em>
+    </h3>
+    <h3 *ngIf="product.on_sale !== 'PRICE_MOD'"> kr {{product.price.toFixed(2)}} </h3>
     <button type="button" class="waves-effect waves-light btn" (click)="addToCart(product.id)">Add to cart</button>
   </div>
 
   <div *ngIf="user && user.isAdmin">
     <br><br><br>
-    <a [routerLink]="['/product', product.id, 'edit']" class="btn">Edit this product</a>
+    <a [routerLink]="['/products/edit', product.id]" class="btn">Edit this product</a>
   </div>
 </div>
