@@ -1,13 +1,19 @@
 # TDT4242 Group2
 Shop til you drop devops and webapp project for TDT4242 2018.
 
-TOC
+### TOC
 * [Code review info](#code-review-info)
 * [Development setup](#development-setup)
 * [API reference](#api-reference)
 
 ## Code review info
-Some useful info for those who should review our code. (link to site)
+Here follows some useful info for those who should review our code.
+
+The code from sprint 1 will remain in the [*master* branch](https://github.com/DeimosA/TDT4242-Group2/tree/master).
+Note that *dev* is the default branch in our repo so click previous link as needed.
+
+<!--(link to site)-->
+
 ### Backend
 Our server is based on the [Sails](https://sailsjs.com/) framework which exposes a somewhat RESTful API. The backend folder includes a lot of generated files, so we have listed the most relevant folders and files that we have edited. Sails blueprints mostly handle the regular CRUD operations, so *don't panic* if you can't find any code for them. Permissions for these operations are defined in `policies.js`.
 ```
@@ -48,6 +54,12 @@ To locally run the backend on your computer, CD to the backend folder, and serve
 ```
 sails lift
 ```
+#### Bootstrapping an admin user
+Create a user through the frontend or the API. Then run Sails in CLI mode with `sails console` and update the user you just created like this:
+```
+User.update({email: 'youremail@mail.com'}, {isAdmin: true}).exec((err, user) => {console.log(err ? err : user)})
+```
+Replacing `youremail@mail.com` with the email you just used to register a user.
 
 ### Frontend
 Make sure you have angular installed. Follow the guide at https://angular.io/guide/quickstart
@@ -73,9 +85,9 @@ GET /api/user
 ```
 Get the list of all users. Requires admin privileges.
 ```
-GET /api/user/:id?populate=purchase_history
+GET /api/user/:id?populate=order_history
 ```
-Get user details with purchase history for user with :id.
+Get user details with order history for user with :id.
 ```
 DELETE /api/user/:id
 ```
@@ -100,15 +112,17 @@ Give user with :id admin privileges. Requires admin privileges.
 POST /api/user/:id/removeadmin
 ```
 Remove admin privileges from user with :id. Requires admin privileges.
+
 ### Products
 ```
 GET /api/product
 ```
-Get list of all products. *URL params apply*
+Get list of all products. [*URL params apply*](https://sailsjs.com/documentation/reference/blueprint-api/find-where).
 ```
 POST /api/product
 ```
-Create a new product. Requires admin privileges.
+Create a new product. See [model attributes](backend/api/models/Product.js) for required fields.  
+Requires admin privileges.
 ```
 GET /api/product/:id
 ```
@@ -121,3 +135,43 @@ Update product with :id. Requires admin privileges.
 DELETE /api/product/:id
 ```
 Delete product with :id. Requires admin privileges.
+
+### Order
+```
+GET /api/order?populate=user&user_confirmed=true
+```
+Get list of all user confirmed orders with user details. Requires admin privileges.
+```
+POST /api/order
+```
+Place a new order. Should be an array of objects with `productId` and `quantity`. Orders must be confirmed after placing.  
+Returns a json response with order details like in the example below:
+
+<details><summary>Click to expand example</summary><pre>
+{
+    "products": [
+        {
+            "product": {...},
+            "quantity": 2,
+            "sum": 40.6
+        },
+        {
+            "product": {...},
+            "quantity": 1,
+            "sum": 19
+        }
+    ],
+    "totalPrice": 59.6,
+    "orderNumber": "TODO should be order ID",
+    "orderDate": "ISO date string"
+}
+</pre></details><br>
+
+```
+POST /api/order/:id/confirm
+```
+Confirm a placed order with :id.
+```
+POST /api/order/:id/dismiss
+```
+Dismiss a placed order with :id. Must be **not confirmed** or **confirmed with status PENDING**.

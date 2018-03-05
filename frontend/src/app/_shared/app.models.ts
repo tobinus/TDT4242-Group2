@@ -1,4 +1,8 @@
+import { Observable } from "rxjs/Observable";
 
+/**
+ * User details
+ */
 class UserModel{
 
   id: number;
@@ -14,9 +18,11 @@ class UserModel{
       throw new Error('Not a valid user object');
     }
   }
-
 }
 
+/**
+ * Product details
+ */
 interface ProductModel{
   id: number;
   name: string;
@@ -29,7 +35,44 @@ interface ProductModel{
   on_sale: string;
   stock_count: number;
   stock_resupply_date: Date;
-  
 }
 
-export {UserModel, ProductModel}
+/**
+ * An item in the shopping cart
+ */
+class ShoppingCartItem{
+
+  private _prodId: number;
+  private _qty: number;
+  private _productResolver: Function;
+
+  constructor(productResolver: Function, productId: number, qty :number = 1){
+    this._prodId = productId;
+    this._qty = qty;
+    this._productResolver = productResolver;
+  }
+
+  public get productId() : number{
+    return this._prodId;
+  }
+
+  public get product() : Observable<ProductModel>{
+    return this._productResolver(this._prodId);
+  }
+
+  public get quantity(){
+    return this._qty;
+  }
+
+  public set quantity(qty: number){
+    this._qty = qty;
+  }
+}
+
+interface SearchForm {
+  curr_search: string,
+  curr_price: number,
+  curr_sort: string,
+}
+
+export {UserModel, ProductModel, ShoppingCartItem, SearchForm}

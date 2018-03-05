@@ -1,7 +1,7 @@
 const request = require('supertest')
 const should = require('should')
 
-describe('UserController', () => {
+xdescribe('UserController', () => {
 
   /* Wrap for request */
   const post = (url, data, code, cookie = '') => request(sails.hooks.http.app).post(url).set('Cookie', cookie).send(data).expect(code)

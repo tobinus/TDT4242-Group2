@@ -47,7 +47,6 @@ export class LoginComponent implements OnInit, OnDestroy {
     // call service object, get observable.
     this.userAuthService.login(this.userCredentials.email, this.userCredentials.password).subscribe(res => {
       // successfull login
-      console.log(res);
       this.handleLoginResult(200);
     }, err =>{
       // error

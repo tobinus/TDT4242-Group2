@@ -12,8 +12,7 @@ import { UserModel } from "../app.models";
 @Injectable()
 export class UserAuthService {
 
-  private currentUser: UserModel = null;
-  private userAuthEvents: BehaviorSubject<object> = new BehaviorSubject({isLoggedIn: false});
+  private userAuthEvents: BehaviorSubject<UserModel> = new BehaviorSubject(null);
 
   constructor(
     private http: HttpClient,
@@ -68,9 +67,6 @@ export class UserAuthService {
    * @returns {Observable<UserModel>}
    */
   getCurrentUser(): Observable<UserModel> {
-    if (this.currentUser) {
-      return Observable.of(this.currentUser);
-    }
     let url = '/api/user/current';
     return this.http.get(url)
       .map(result => new UserModel(result))
@@ -91,16 +87,14 @@ export class UserAuthService {
    * @param {UserModel} user
    */
   private userLoggedIn(user: UserModel): void {
-    this.currentUser = user;
-    this.userAuthEvents.next({isLoggedIn: true});
+    this.userAuthEvents.next(user);
   }
 
   /**
    * Stuff to do when a user logs out
    */
   private userLoggedOut(): void {
-    this.currentUser = null;
-    this.userAuthEvents.next({isLoggedIn: false});
+    this.userAuthEvents.next(null);
   }
 
 }

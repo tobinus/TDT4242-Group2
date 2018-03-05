@@ -2,7 +2,9 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 import { trigger, state, style, transition, animate} from '@angular/animations';
 
+import { UserModel } from '../_shared/app.models';
 import { UserAuthService } from "../_shared/services/user-auth.service";
+import { ShoppingCartService } from "../_shared/services/shopping-cart.service";
 
 @Component({
   selector: 'app-navbar',
@@ -42,8 +44,13 @@ export class NavbarComponent implements OnInit, OnDestroy {
   private welcomeMessageA: string = this.welcomeMessageList[this.messageIndex];
   private welcomeMessageB: string = '';
 
+  private itemsInCart = 0;
+  private intervalId : number;
+  private shoppingCartSub : Subscription;
+
   constructor(
     private userAuthService: UserAuthService,
+    private shoppingCart : ShoppingCartService,
   ) { }
 
   ngOnInit() {
@@ -52,7 +59,11 @@ export class NavbarComponent implements OnInit, OnDestroy {
       if (next.hasOwnProperty('isLoggedIn')) this.isLoggedIn = next['isLoggedIn'];
     });
 
-    setInterval(() => {
+    this.shoppingCartSub = this.shoppingCart.getShoppingCart().subscribe((cart) => {
+      this.itemsInCart = cart.length;
+    });
+
+    this.intervalId = window.setInterval(() => {
       // Pick random welcome message and rotate on interval
       let prevIndex = this.messageIndex;
       while (this.messageIndex === prevIndex) {
@@ -68,6 +79,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     // Un-subscribe from login and logout user auth events to avoid mem leaks
     this.userAuthEventsSub.unsubscribe();
+    window.clearInterval(this.intervalId);
+    this.shoppingCartSub.unsubscribe();
   }
 
   /**

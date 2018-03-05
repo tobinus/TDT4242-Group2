@@ -1,0 +1,17 @@
+
+.product-list-item {
+  display: flex;
+  justify-content: space-between;
+}
+
+.price-box {
+  display: flex;
+}
+
+.deal-display {
+  margin-right: 30px;
+}
+
+.old-price {
+  text-decoration: line-through;
+}

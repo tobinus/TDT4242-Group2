@@ -1,12 +1,14 @@
 
 <div *ngIf="currentUser">
   <h2>{{currentUser.email}}</h2>
-  <p>Shopping history etc.</p>
+</div>
+<div *ngIf="currentUser && currentUser.order_history">
+  <h3>Order history</h3>
 </div>
 <div *ngIf="!currentUser">
   <p>You must log in to view this page.</p>
 </div>
 <div *ngIf="currentUser && currentUser.isAdmin">
-  <h2>Admin stuff here?</h2>
-  <!--TODO admin page here or separate page?-->
+  <h3>Admin stuff</h3>
+  <p><a routerLink="/products/new">Create new product</a></p>
 </div>

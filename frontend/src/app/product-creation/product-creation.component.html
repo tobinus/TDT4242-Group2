@@ -1,58 +1,117 @@
-<div class="container">
-  <h3>Product creation - admin site</h3>
-  <div class="row">
-    <div class="progress" *ngIf="loading">
-      <div class="indeterminate"></div>
-    </div>
-    <form *ngIf="!loading" class="col s12" (ngSubmit)="createProduct(); productForm.reset();" #productForm="ngForm">
-      <div class="row">
-        <div class="input-field col s4">
-          <label for="productname">Product name</label>
-          <input
-            type="text" id="productname" name="productname" required
-            [(ngModel)]="prodCredentials.name"
-            #productname="ngModel"
-            class="validate"
-            placeholder="Product name"
-          />
 
-        </div>
-        <div class="input-field col s4">
-          <label for="manufacturer">Manufacturer</label>
-          <input
-            type="text" id="productManufacturer" name="productManufacturer" required
-            [(ngModel)]="prodCredentials.manufacturer"
-            #productManufacturer="ngModel"
-            class="validate"
-            placeholder="manufacturer"
-          />
-        </div>
-        <div class="input-field col s4">
-          <label for="unitPrice">Unit price</label>
-          <input
-            type="number" id="unitPrice" name="unitPrice" required
-            [(ngModel)]="prodCredentials.price"
-            #unitPrice="ngModel"
-            placeholder="unitPrice"
-          />
-        </div>
-
-      </div>
-      <div class="row">
-        <div class="input-field col s12">
-          <label for></label>
-          <textarea 
-            id="unitDesc" name="unitDesc" required
-            [(ngModel)]="prodCredentials.description" 
-            #unitDesc="ngModel"
-            placeholder="unit description"
-            class="materialize-textarea"
-          ></textarea>
-        </div>
-      </div>
-      <button type="submit" [disabled]="!productForm.form.valid" class="right">Create product</button>
-    </form>
-  </div>
+<div class="row"></div>
+<div class="progress" *ngIf="loading">
+  <div class="indeterminate"></div>
 </div>
+<div *ngIf="!loading && product" class="container">
+  <h2>{{product.id ? 'Edit' : 'Create new'}} product</h2>
 
+  <form (ngSubmit)="saveProduct()" #productForm="ngForm">
 
+    <div class="input-field">
+      <input
+        type="text" id="product_name" name="product_name" required
+        [(ngModel)]="product.name"
+        #product_name="ngModel"
+        class="validate"
+      />
+      <label for="product_name">Product name</label>
+    </div>
+
+    <div class="input-field">
+      <input
+        type="text" id="product_manufacturer" name="product_manufacturer" required
+        [(ngModel)]="product.manufacturer"
+        #product_manufacturer="ngModel"
+        class="validate"
+      />
+      <label for="product_manufacturer">Manufacturer</label>
+    </div>
+
+    <div class="input-field">
+      <textarea
+        id="product_description" name="product_description" required
+        [(ngModel)]="product.description"
+        #product_description="ngModel"
+        class="materialize-textarea validate"
+      ></textarea>
+      <label for="product_description">Description</label>
+    </div>
+
+    <div class="input-field">
+      <input
+        type="number" id="product_price" name="product_price" required step="0.01" min="0"
+        [(ngModel)]="product.price"
+        #product_price="ngModel"
+        class="validate"
+      />
+      <label for="product_price">Price (kroner)</label>
+    </div>
+
+    <!-- Sale type radio buttons -->
+    <div class="radio-container">
+      <div class="row">
+        <div class="col s3">
+          <input type="radio" name="sale_type" id="sale_type_1" value="NO_SALE"
+                 class="with-gap"
+                 [(ngModel)]="product.on_sale"
+                 #sale_type_1="ngModel"
+          >
+          <label for="sale_type_1">No sale</label>
+        </div>
+        <div class="col s9">Full price</div>
+      </div>
+      <div class="row">
+        <div class="col s3">
+          <input type="radio" name="sale_type" id="sale_type_2" value="PRICE_MOD"
+                 class="with-gap"
+                 [(ngModel)]="product.on_sale"
+                 #sale_type_2="ngModel"
+          >
+          <label for="sale_type_2">Percent sale</label>
+        </div>
+        <div class="col s9">
+          <div class="input-field inline">
+            <input type="number" name="sale_percent" id="sale_percent" min="0" max="100"
+                   class="validate"
+                   (input)="setPriceMod(sale_percent.value)"
+                   [(ngModel)]="percent_sale"
+                   #sale_percent="ngModel"
+            >
+          </div> % sale. <em>Sale price: <span class="red-text">kr {{(product.price * product.price_mod).toFixed(2)}}</span></em>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col s3">
+          <input type="radio" name="sale_type" id="sale_type_3" value="PACKAGE"
+                 class="with-gap"
+                 [(ngModel)]="product.on_sale"
+                 #sale_type_3="ngModel"
+          >
+          <label for="sale_type_3">Package deal</label>
+        </div>
+        <div class="col s9">
+          <div class="input-field inline">
+            <input type="number" name="sale_package_get" id="sale_package_get" min="1"
+                   class="validate"
+                   [(ngModel)]="product.package_get_count"
+                   #sale_package_get="ngModel"
+            >
+          </div> for
+          <div class="input-field inline">
+            <input type="number" name="sale_package_pay" id="sale_package_pay" min="0"
+                   class="validate"
+                   [(ngModel)]="product.package_pay_count"
+                   #sale_package_pay="ngModel"
+            >
+          </div> package deal
+        </div>
+      </div>
+    </div>
+
+    <!-- Submit button -->
+    <button type="submit" [disabled]="!productForm.form.valid"
+            class="btn waves-effect waves-light right">Save product</button>
+  </form>
+
+</div>

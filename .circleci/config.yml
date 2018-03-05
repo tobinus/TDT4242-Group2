@@ -7,65 +7,44 @@ version: 2
 jobs:
   build:
     docker:
- 
-      - image: circleci/node:7.10
-
+      - image: circleci/node:9.6.1
     working_directory: ~/repo/backend
 
     steps:
       - checkout
-
-      # Download and cache dependencies
       - restore_cache:
-          keys:
-          - v1-dependencies-{{ checksum "package.json" }}
-          # fallback to using the latest cache if no exact match is found
-          - v1-dependencies-
-
-      - run: yarn install
-
+          key: v1-dependencies-{{ checksum "backend/package.json" }}
+      - run: cd backend && yarn install
       - save_cache:
           paths:
-            - node_modules
-          key: v1-dependencies-{{ checksum "package.json" }}
-        
+            - backend/node_modules
+          key: v1-dependencies-{{ checksum "backend/package.json" }}
 
   test:
     docker:
-      - image: circleci/node:7.10
+      - image: circleci/node:9.6.1
+    working_directory: ~/repo/backend
+    
+    steps:
+      - checkout
+      - restore_cache:
+          key: v1-dependencies-{{ checksum "backend/package.json" }}
+      - run: cd backend && yarn install
+      - run: cd backend && yarn test
 
+  deploy:
+    docker:
+      - image: circleci/node:9.6.1
     working_directory: ~/repo/backend
 
     steps:
       - checkout
-
-      - restore_cache:
-          keys:
-          - v1-dependencies-{{ checksum "package.json" }}
-          # fallback to using the latest cache if no exact match is found
-          - v1-dependencies-
-
-      - run: yarn test
-
-
-  deploy:
-    docker:
-
-      - image: circleci/node:7.10
-
-    working_directory: ~/repo
-
-    steps:
-      - checkout
-
       - run:
           name: Run setup script
           command: bash .circleci/setup-heroku.sh
-
       - add_ssh_keys:
           fingerprints:
             - "a6:aa:7f:bc:c1:d0:8a:45:1f:d3:2d:bf:f3:23:0e:2b"
-
       - run:
           name: Deploy Master to Heroku
           command: |
@@ -84,7 +63,7 @@ workflows:
           requires:
             - build
             - test
-          branches:
-            only:
-              - master
-
+          filters:
+            branches:
+              only:
+                - master

@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
+import { ProductModel } from "../_shared/app.models";
+import { ProductsService } from "../_shared/services/products.service";
+
 @Component({
   selector: 'app-deals',
   templateUrl: './deals.component.html',
@@ -7,9 +10,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DealsComponent implements OnInit {
 
-  constructor() { }
+  saleProducts: ProductModel[];
+  // TODO pagination
+
+  constructor(
+    private productsService: ProductsService,
+  ) { }
 
   ngOnInit() {
+    this.productsService.getSaleProducts().subscribe((response) => {
+      this.saleProducts = response;
+    });
   }
 
 }
