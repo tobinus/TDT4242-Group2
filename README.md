@@ -12,6 +12,12 @@ Here follows some useful info for those who should review our code.
 The code from sprint 1 will remain in the [*master* branch](https://github.com/DeimosA/TDT4242-Group2/tree/master).
 Note that *dev* is the default branch in our repo so click previous link as needed.
 
+We have added a demo DB with an admin user and a few products that you can use if you'd like to. Just copy the `localDiskDb.db` file from `backend/_demo_db` to `backend/.tmp` after the first time you run Sails (or just create the `.tmp` dir yourself).
+```
+E-mail:     admin@admin.com
+password:   funwithcodereview
+```
+
 <!--(link to site)-->
 
 ### Backend
@@ -39,6 +45,9 @@ Angular docs have more on the [src folder structure](https://angular.io/guide/qu
 
 ## Development setup
 Do the following steps to set up and run the app for development. Functionality is dependent on having the backend up and running.
+
+Install [Node.js](https://nodejs.org/en/) and make sure that npm is ticked off.
+
 ### Backend
 Make sure you have sails installed. Guide and introduction to sails can be found at https://sailsjs.com/get-started
 
@@ -46,11 +55,11 @@ Install sails globally for the sails command to work:
 ```
 npm i -g sails
 ```
-To install the application, CD to the backend folder and run:
+To install the application, cd to the `backend` folder and run:
 ```
 npm install
 ```
-To locally run the backend on your computer, CD to the backend folder, and serve the backend with:
+Still in the backend folder, serve the backend with:
 ```
 sails lift
 ```
@@ -64,14 +73,15 @@ Replacing `youremail@mail.com` with the email you just used to register a user.
 ### Frontend
 Make sure you have angular installed. Follow the guide at https://angular.io/guide/quickstart
 
-To install the application, CD to the frontend folder and write:
+To install the application, cd to the `frontend` folder and run:
 ```
 npm install
 ```
-To locally run the frontend on your computer, CD to the frontend folder, and launch the application:
+Still in the frontend folder, launch the application with:
 ```
 npm start
 ```
+This should automatically open a browser window to http://localhost:4200
 
 ## API reference
 ### Users

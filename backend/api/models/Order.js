@@ -41,7 +41,8 @@ module.exports = {
     // Whether the user has confirmed this order
     user_confirmed: {
       type: 'boolean',
-      defaultsTo: false,
+      // TODO This should default to false so that the order has to be confirmed by the user. Set to true for now until implemented in frontend
+      defaultsTo: true,
     },
 
     // Detailed content of this order: Products, quantity, total price etc.
