@@ -50,8 +50,6 @@ export class ProductsService {
       ],
       listed: true, // We only want products that are still buyable
     };
-    // let url = '/api/product?where={"name": {"contains": "' + searchTerm + '"}}' +
-    //   '&skip=' + skip + '&limit=' + limit + '&sort=' + sort;
     let url = `/api/product?where=${JSON.stringify(where)}&skip=${skip}&limit=${limit}&sort=${sort}`;
     return this.getProducts(url);
   }
@@ -74,12 +72,17 @@ export class ProductsService {
   // ----------- posters -----------
 
   /**
-   *  post a new product to the backend
+   *  Create a new product or update if it has an ID
    */
-  postProduct(product): Observable<Object> {
-    let url = '/api/product';
-    return this.http.post(url, product);
-
+  postOrUpdateProduct(product: ProductModel): Observable<ProductModel> {
+    let url: string;
+    if (product.id) {
+      url = '/api/product/' + product.id;
+      return this.http.put<ProductModel>(url, product);
+    } else {
+      url = '/api/product';
+      return this.http.post<ProductModel>(url, product);
+    }
   }
 
 }

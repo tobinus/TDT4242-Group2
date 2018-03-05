@@ -21,16 +21,16 @@ const appRoutes: Routes = [
     component: ProductContainerComponent,
   },
   {
-    path: 'product/new',
+    path: 'products/new',
     component: ProductCreationComponent,
   },
   {
-    path: 'product/:productId',
+    path: 'products/edit/:productId',
+    component: ProductCreationComponent,
+  },
+  {
+    path: 'product/:productId', // No s for unambiguous routing
     component: ProductDetailsComponent,
-  },
-  {
-    path: 'product/:productId/edit',
-    component: ProductCreationComponent,
   },
   {
     path: 'cart',

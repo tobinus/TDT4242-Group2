@@ -1,7 +1,12 @@
-import { Component, OnInit, Input} from '@angular/core';
+import { Component, OnInit} from '@angular/core';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/switchMap';
 
 import { ProductsService } from '../_shared/services/products.service';
 import { ProductModel } from "../_shared/app.models";
+
+declare let Materialize; // Webstorm doesn't recognize Materialize global
 
 @Component({
   selector: 'app-product-creation',
@@ -10,52 +15,58 @@ import { ProductModel } from "../_shared/app.models";
 })
 export class ProductCreationComponent implements OnInit {
 
-  constructor(private prodService: ProductsService,) { }
+  private loading: boolean = false;
+  private product: ProductModel;
+  private percent_sale: number;
 
-  
-  prodCredentials: object;
-  
-  loading: boolean;
-  
+  constructor(
+    private productsService: ProductsService,
+    private activatedRoute: ActivatedRoute,
+    private router: Router,
+  ) { }
+
   ngOnInit() {
-    this.loading = false;
-    /*this.prodCredentials= {
-      id: -1,
-      name: "",
-      price: 0,
-      description: "",
-      manufacturer: ""
-    }*/
+    let productObs: Observable<ProductModel> = this.activatedRoute.paramMap.switchMap(
+      (params: ParamMap) => {
+        if (params.has('productId')) {
+          this.loading = true;
+          return this.productsService.getProduct(params.get('productId'));
+        } else {
+          // Not edit so create new
+          this.product = <ProductModel>{};
+        }
+      });
+
+    productObs.subscribe(product => {
+      // Product loaded
+      this.product = product;
+      this.loading = false;
+      this.setPercentSale();
+      setTimeout(() => Materialize.updateTextFields(), 5); // Fix to not have labels on top of input text
+    }, error => {
+      if (error.status) alert('An error occurred loading the product details: ' + error.status);
+      // else console.log(error);
+    });
   }
 
-  /*
-    id: number;
-  name: string;
-  price: number;
-  description: string;
-  manufacturer: string;
-  price_mod: number;
-  package_get_count: number;
-  package_pay_count: number;
-  on_sale: string;
-  stock_count: number;
-  stock_resupply_date: Date; */
-  createProduct(){
+  private saveProduct() {
     this.loading = true;
-    // call product service to create a product
-    //name, unitprice, description
-    this.prodService.postProduct(this.prodCredentials).subscribe(res => {
-      console.log(res);
+    // Call product service to create a new or update existing product
+    this.productsService.postOrUpdateProduct(this.product).subscribe(result => {
       this.loading = false;
-    }, err => {
+      this.router.navigate(['/product', result.id]);
+    }, error => {
       this.loading = false;
-      console.log("error");
-      console.log(err);
+      if (error.status) alert('An error occurred saving the product: ' + error.status);
+      console.log(error);
     });
-    
-    
-    // after observable object has done it's job, and it's confirmed that the product has been created in the backend, set this.loading to false and give the admin some "it has been made" message or something
   }
-  
-  
+
+  private setPriceMod(percent_value: number) {
+    this.product.price_mod = 1 - percent_value / 100;
+  }
+  private setPercentSale() {
+    this.percent_sale = (1 - this.product.price_mod) * 100;
+  }
+
 }
