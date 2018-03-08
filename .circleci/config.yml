@@ -1,0 +1,69 @@
+# Javascript Node CircleCI 2.0 configuration file
+#
+# Check https://circleci.com/docs/2.0/language-javascript/ for more details
+# 
+version: 2
+
+jobs:
+  build:
+    docker:
+      - image: circleci/node:9.6.1
+    working_directory: ~/repo/backend
+
+    steps:
+      - checkout
+      - restore_cache:
+          key: v1-dependencies-{{ checksum "backend/package.json" }}
+      - run: cd backend && yarn install
+      - save_cache:
+          paths:
+            - backend/node_modules
+          key: v1-dependencies-{{ checksum "backend/package.json" }}
+
+  test:
+    docker:
+      - image: circleci/node:9.6.1
+    working_directory: ~/repo/backend
+    
+    steps:
+      - checkout
+      - restore_cache:
+          key: v1-dependencies-{{ checksum "backend/package.json" }}
+      - run: cd backend && yarn install
+      - run: cd backend && yarn test
+
+  deploy:
+    docker:
+      - image: circleci/node:9.6.1
+    working_directory: ~/repo/backend
+
+    steps:
+      - checkout
+      - run:
+          name: Run setup script
+          command: bash .circleci/setup-heroku.sh
+      - add_ssh_keys:
+          fingerprints:
+            - "a6:aa:7f:bc:c1:d0:8a:45:1f:d3:2d:bf:f3:23:0e:2b"
+      - run:
+          name: Deploy Master to Heroku
+          command: |
+            git push --force git@heroku.com:mighty-garden-63617.git HEAD:refs/heads/master
+            heroku restart -a mighty-garden-63617
+
+workflows:
+  version: 2
+  build-test-deploy:
+    jobs:
+      - build
+      - test:
+          requires:
+            - build
+      - deploy:
+          requires:
+            - build
+            - test
+          filters:
+            branches:
+              only:
+                - master

@@ -48,4 +48,38 @@ module.exports.policies = {
 		// before letting any users feed our rabbits
 		// feed : ['isNiceToAnimals', 'hasRabbitFood']
 	// }
+
+  UserController: {
+    '*': false,
+    create: true,
+    find: 'isAdmin',
+    findOne: 'isSelf',
+    destroy: 'isAdmin',
+    populate: false,
+    login: true,
+    logout: 'sessionAuth',
+    current: true,
+    makeAdmin: 'isAdmin',
+    removeAdmin: 'isAdmin',
+  },
+
+  ProductController: {
+    '*': false,
+    create: 'isAdmin',
+    find: true,
+    findOne: true,
+    update: 'isAdmin',
+    destroy: 'isAdmin',
+    populate: false,
+  },
+
+  OrderController: {
+    '*': false,
+    create: 'sessionAuth',
+    find: 'isAdmin',
+    findOne: 'isAdmin',
+    confirm: 'sessionAuth',
+    dismiss: 'sessionAuth',
+  }
+
 };

@@ -1,0 +1,307 @@
+{
+  "data": {
+    "order": [],
+    "product": [
+      {
+        "name": "Socks",
+        "description": "A pair of socks, so that you can walk around in your stockinged feet",
+        "manufacturer": "Sock Co",
+        "price": 29.9,
+        "listed": true,
+        "price_mod": 1,
+        "package_get_count": 1,
+        "package_pay_count": 1,
+        "on_sale": "NO_SALE",
+        "stock_count": 0,
+        "createdAt": "2018-03-05T19:14:16.195Z",
+        "updatedAt": "2018-03-05T19:20:01.050Z",
+        "id": 1
+      },
+      {
+        "name": "Woolly socks",
+        "description": "Nice and warm woolly socks",
+        "manufacturer": "Sock Co",
+        "price": 48.9,
+        "on_sale": "PACKAGE",
+        "package_get_count": 3,
+        "package_pay_count": 2,
+        "listed": true,
+        "price_mod": 1,
+        "stock_count": 0,
+        "createdAt": "2018-03-05T19:14:16.198Z",
+        "updatedAt": "2018-03-05T19:14:16.198Z",
+        "id": 2
+      },
+      {
+        "name": "One sock",
+        "description": "One single sock for when the washing machine ate the other",
+        "manufacturer": "Sock Co",
+        "price": 19,
+        "listed": true,
+        "price_mod": 1,
+        "package_get_count": 1,
+        "package_pay_count": 1,
+        "on_sale": "NO_SALE",
+        "stock_count": 0,
+        "createdAt": "2018-03-05T19:14:16.201Z",
+        "updatedAt": "2018-03-05T19:14:16.201Z",
+        "id": 3
+      },
+      {
+        "name": "Pile of mud",
+        "description": "Dirty mud from rainy Wales",
+        "manufacturer": "Nature",
+        "price": 9.9,
+        "listed": true,
+        "price_mod": 1,
+        "package_get_count": 1,
+        "package_pay_count": 1,
+        "on_sale": "NO_SALE",
+        "stock_count": 0,
+        "createdAt": "2018-03-05T19:14:16.204Z",
+        "updatedAt": "2018-03-05T19:14:16.204Z",
+        "id": 4
+      },
+      {
+        "name": "One kilogram of snow",
+        "description": "Beautiful white snow full of snowflakes from the mountenous boreal regions of northern Norway",
+        "manufacturer": "Nature",
+        "price": 29.9,
+        "listed": true,
+        "price_mod": 1,
+        "package_get_count": 1,
+        "package_pay_count": 1,
+        "on_sale": "NO_SALE",
+        "stock_count": 0,
+        "createdAt": "2018-03-05T19:14:16.207Z",
+        "updatedAt": "2018-03-05T19:14:16.207Z",
+        "id": 5
+      },
+      {
+        "name": "Dirt block",
+        "manufacturer": "Nature",
+        "description": "A giant 1 x 1 meter block of high quality dirt with grass on top. Can be magically placed and picked up instantly",
+        "price": 129.5,
+        "price_mod": 0.9,
+        "on_sale": "PRICE_MOD",
+        "listed": true,
+        "package_get_count": 1,
+        "package_pay_count": 1,
+        "stock_count": 0,
+        "createdAt": "2018-03-05T19:14:16.211Z",
+        "updatedAt": "2018-03-05T19:14:16.211Z",
+        "id": 6
+      },
+      {
+        "name": "Fake diamond",
+        "manufacturer": "Plastics Inc",
+        "description": "A sizeable fake diamond that doesn't spark or shine at all",
+        "price": 1950,
+        "price_mod": 0.010000000000000009,
+        "on_sale": "PRICE_MOD",
+        "listed": true,
+        "package_get_count": 1,
+        "package_pay_count": 1,
+        "stock_count": 0,
+        "createdAt": "2018-03-05T19:14:16.215Z",
+        "updatedAt": "2018-03-05T19:14:16.215Z",
+        "id": 7
+      },
+      {
+        "name": "Microscopic plastic scrap",
+        "manufacturer": "Plastics Inc",
+        "description": "For when nature is just too darn clean and needs a little bit of that good ol' filth",
+        "price": 5.5,
+        "listed": true,
+        "price_mod": 1,
+        "package_get_count": 1,
+        "package_pay_count": 1,
+        "on_sale": "NO_SALE",
+        "stock_count": 0,
+        "createdAt": "2018-03-05T19:14:16.219Z",
+        "updatedAt": "2018-03-05T19:14:16.219Z",
+        "id": 8
+      },
+      {
+        "name": "Amazing grace",
+        "manufacturer": "Trait brokers",
+        "description": "Be the light with this divine, regenerative virtue",
+        "price": 245,
+        "listed": true,
+        "price_mod": 1,
+        "package_get_count": 1,
+        "package_pay_count": 1,
+        "on_sale": "NO_SALE",
+        "stock_count": 0,
+        "createdAt": "2018-03-05T19:14:16.222Z",
+        "updatedAt": "2018-03-05T19:14:16.222Z",
+        "id": 9
+      },
+      {
+        "name": "Sourpuss",
+        "manufacturer": "Trait brokers",
+        "description": "Acidic, salty, grumpy. Just the way you want it",
+        "price": 499,
+        "listed": true,
+        "price_mod": 1,
+        "package_get_count": 1,
+        "package_pay_count": 1,
+        "on_sale": "NO_SALE",
+        "stock_count": 0,
+        "createdAt": "2018-03-05T19:14:16.224Z",
+        "updatedAt": "2018-03-05T19:14:16.224Z",
+        "id": 10
+      }
+    ],
+    "user": [
+      {
+        "email": "admin@admin.com",
+        "password": "$2a$10$kSFxbxYwQumulWBYMztCgeIfdPfOP/Z9Nx0r7U2R9DIUTT9A.Kmq2",
+        "isAdmin": true,
+        "createdAt": "2018-03-05T18:39:47.305Z",
+        "updatedAt": "2018-03-05T18:41:34.597Z",
+        "id": 1
+      }
+    ]
+  },
+  "schema": {
+    "order": {
+      "user": {
+        "type": "integer",
+        "model": "user",
+        "foreignKey": true,
+        "alias": "user"
+      },
+      "total_price": {
+        "type": "float"
+      },
+      "status": {
+        "type": "string",
+        "enum": [
+          "PENDING",
+          "ACCEPTED",
+          "AWAITING_RESUPPLY",
+          "SHIPPED",
+          "CANCELLED"
+        ],
+        "defaultsTo": "PENDING"
+      },
+      "user_confirmed": {
+        "type": "boolean",
+        "defaultsTo": false
+      },
+      "order_details": {
+        "type": "json"
+      },
+      "id": {
+        "type": "integer",
+        "autoIncrement": true,
+        "primaryKey": true,
+        "unique": true
+      },
+      "createdAt": {
+        "type": "datetime"
+      },
+      "updatedAt": {
+        "type": "datetime"
+      }
+    },
+    "product": {
+      "name": {
+        "type": "string",
+        "unique": true,
+        "notNull": true
+      },
+      "description": {
+        "type": "text"
+      },
+      "manufacturer": {
+        "type": "string"
+      },
+      "listed": {
+        "type": "boolean",
+        "defaultsTo": true
+      },
+      "price": {
+        "type": "float"
+      },
+      "price_mod": {
+        "type": "float",
+        "defaultsTo": 1
+      },
+      "package_get_count": {
+        "type": "integer",
+        "defaultsTo": 1
+      },
+      "package_pay_count": {
+        "type": "integer",
+        "defaultsTo": 1
+      },
+      "on_sale": {
+        "type": "string",
+        "enum": [
+          "NO_SALE",
+          "PRICE_MOD",
+          "PACKAGE"
+        ],
+        "defaultsTo": "NO_SALE"
+      },
+      "image": {
+        "type": "binary"
+      },
+      "stock_count": {
+        "type": "integer",
+        "defaultsTo": 0
+      },
+      "stock_resupply_date": {
+        "type": "date"
+      },
+      "id": {
+        "type": "integer",
+        "autoIncrement": true,
+        "primaryKey": true,
+        "unique": true
+      },
+      "createdAt": {
+        "type": "datetime"
+      },
+      "updatedAt": {
+        "type": "datetime"
+      }
+    },
+    "user": {
+      "email": {
+        "type": "string",
+        "unique": true
+      },
+      "password": {
+        "type": "string"
+      },
+      "isAdmin": {
+        "type": "boolean",
+        "defaultsTo": false
+      },
+      "id": {
+        "type": "integer",
+        "autoIncrement": true,
+        "primaryKey": true,
+        "unique": true
+      },
+      "createdAt": {
+        "type": "datetime"
+      },
+      "updatedAt": {
+        "type": "datetime"
+      }
+    }
+  },
+  "counters": {
+    "order": {},
+    "product": {
+      "id": 10
+    },
+    "user": {
+      "id": 1
+    }
+  }
+}

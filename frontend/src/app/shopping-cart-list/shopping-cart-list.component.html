@@ -1,0 +1,22 @@
+<div class="row">
+  <ul class="collection with-header">
+    <li class="collection-header"><h4>Shopping Cart</h4></li>
+    <li class="collection-item" *ngFor="let item of cartList">
+      <div class="flow-text" *ngIf="productLoaded(item)">
+        <div>
+          {{product(item).name}} - {{product(item).price}}kr
+          <button (click)="updateQty(item, 1)" class="btn-floating waves-effect"><i class="material-icons">add</i></button> 
+          x{{item.quantity}}
+          <button (click)="updateQty(item,-1)" class="btn-floating waves-effect"><i class="material-icons">remove</i></button>
+          <button (click)="deleteItem(item)" class="btn-floating waves-effect"><i class="material-icons">delete</i></button> 
+        </div>
+        <div>
+          {{product(item).description}}
+        </div>
+      </div>
+      <div *ngIf="!productLoaded(item)" class="progress">
+          <div class="indeterminate"></div>
+      </div> 
+    </li>
+  </ul>
+</div>
